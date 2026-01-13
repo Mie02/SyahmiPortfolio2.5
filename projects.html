@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — By Syahmi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Syahmi</a>
+      <nav class="links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1 class="page-title">Projects</h1>
+      <p class="muted">Click a project to view details + screenshots.</p>
+
+      <div class="grid">
+        <a class="project-card" href="projects/drag-and-drop-game.html">
+          <div class="thumb"><img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop Game" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Flashcard + Drag & Drop Game</h3>
+            <p>Unity learning game with difficulty modes, timer, scoring & audio.</p>
+            <div class="tags"><span>Unity</span><span>C#</span><span>UI/UX</span><span>Game Logic</span></div>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/opengl-cafeteria.html">
+          <div class="thumb"><img class="zoomable" src="images/cf5.png" alt="OpenGL 3D Cafeteria Module" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>OpenGL 3D Cafeteria Module</h3>
+            <p>3D building using primitives, transformations & matrix stack (GLUT).</p>
+            <div class="tags"><span>OpenGL</span><span>C++</span><span>3D</span><span>GLUT</span></div>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/motion-graphics.html">
+          <div class="thumb"><img class="zoomable" src="images/mg3.png" alt="Motion Graphics Video" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Motion Graphics</h3>
+            <p>Kinetic typography + clean transitions + music sync.</p>
+            <div class="tags"><span>Editing</span><span>Typography</span><span>Motion</span></div>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/computer-animation.html">
+          <div class="thumb"><img class="zoomable" src="images/ca1.png" alt="Computer Animation Project" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Computer Animation Project</h3>
+            <p>Animation principles applied: timing, spacing, squash & stretch.</p>
+            <div class="tags"><span>Animation</span><span>Keyframes</span><span>Principles</span></div>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/blender-workshop-2.html">
+          <div class="thumb"><img class="zoomable" src="images/ws5.png" alt="Blender Workshop 2" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Workshop 2</h3>
+            <p>Modeling + materials + lighting + basic render workflow + camera angle.</p>
+            <div class="tags"><span>Blender</span><span>Cinematography</span><span>Modeling</span><span>Materials</span><span>Lighting</span></div>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/bujang-lapok.html">
+          <div class="thumb"><img class="zoomable" src="images/bl1.jpg" alt="Bujang Lapok Recreate" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Bujang Lapok Recreate</h3>
+            <p>Recreate scene/style study with camera angles & mood lighting.</p>
+            <div class="tags"><span>Recreate</span><span>Cinematography</span><span>Lighting</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">HTML • CSS • JS</span>
+    </footer>
+  </main>
+
+  <script src="../script.js"></script>
+<!-- Lightbox (click any image to zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside / press Esc to close</div>
+  </div>
+</body>
+</html>
+

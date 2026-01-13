@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workshop 2 Blender & Premiere Pro — Syahmi</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="../index.html">Syahmi</a>
+      <nav class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back" href="../projects.html">← Back to Projects</a>
+
+    <section class="card" style="padding:18px">
+      <h1 class="page-title">Workshop 2 Blender & Premiere Pro</h1>
+      <p class="muted">
+        A Blender practice workshop focusing on modeling, materials, lighting, and clean renders.
+        This page uses a filmstrip layout to feel more “cinematic”.
+      </p>
+      <div class="tags" style="margin-top:10px">
+        <span>Blender</span><span>Modeling</span><span>Materials</span><span>Lighting</span><span>Render</span>
+      </div>
+    </section>
+
+    <section class="section">
+     <h2>Workshop 2 Process</h2>
+<p class="muted">Scroll horizontally (or swipe on mobile). Click to enlarge.</p>
+
+<div class="galleryStrip">
+  <div class="shot"><img class="zoomable" src="../images/ws1.png" alt="Workshop 2 - 1" loading="lazy" decoding="async"></div>
+  <div class="shot"><img class="zoomable" src="../images/ws2.png" alt="Workshop 2 - 2" loading="lazy" decoding="async"></div>
+  <div class="shot"><img class="zoomable" src="../images/ws3.png" alt="Workshop 2 - 3" loading="lazy" decoding="async"></div>
+  <div class="shot"><img class="zoomable" src="../images/ws4.png" alt="Workshop 2 - 4" loading="lazy" decoding="async"></div>
+  <div class="shot"><img class="zoomable" src="../images/ws5.png" alt="Workshop 2 - 5" loading="lazy" decoding="async"></div>
+  <div class="shot"><img class="zoomable" src="../images/ws6.png" alt="Workshop 2 - 6" loading="lazy" decoding="async"></div>
+</div>
+      
+    </section>
+
+    <section class="section">
+      <h2>What I learned</h2>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="skillCard">
+          <div class="skillTitle">Modeling Practice</div>
+          <div class="skillText">Cleaner shapes, consistent scale, better silhouettes.</div>
+        </div>
+        <div class="skillCard">
+          <div class="skillTitle">Lighting & Mood</div>
+          <div class="skillText">Using light placement to guide attention and style.</div>
+        </div>
+        <div class="skillCard">
+          <div class="skillTitle">Presentation</div>
+          <div class="skillText">Better framing and export for portfolio screenshots.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">Blender Project</span>
+    </footer>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="modalBox">
+      <img class="modalImg" alt="">
+      <div class="modalBar">
+        <span id="modalCaption">Preview</span>
+        <button class="modalBtn" id="modalClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+<!-- Lightbox (click any image to zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside / press Esc to close</div>
+  </div>
+</body>
+</html>
+

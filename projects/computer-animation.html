@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Computer Animation Project — Syahmi</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .animGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width:980px){ .animGrid{grid-template-columns:1fr} }
+
+    .poster{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      position:relative;
+      min-height:320px;
+    }
+    .poster::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(520px 240px at 20% 0%, rgba(45,212,191,.16), transparent 60%),
+        radial-gradient(520px 240px at 90% 10%, rgba(255,102,153,.16), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .posterInner{ position:relative; padding:18px; }
+    .principles{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+    .principles .p{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+    }
+    .principles .p b{display:block;margin-bottom:4px}
+    .principles .p span{opacity:.78;line-height:1.55;display:block}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="../index.html">Syahmi</a>
+      <nav class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back" href="../projects.html">← Back to Projects</a>
+
+    
+    <section class="section reveal">
+      <div class="sectionHead">
+        <h2>Video Showcase</h2>
+        <p class="muted">Watch a short highlight. Replace the link with your real video later.</p>
+      </div>
+
+      <div class="videoCard">
+        <div class="videoWrap">
+          <iframe
+            src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+            title="Computer Animation Project video"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="videoMeta">
+          <div class="capTitle">Computer Animation Project</div>
+          <div class="muted">Timing, spacing, squash & stretch — animated in keyframes.</div>
+        </div>
+      </div>
+    </section>
+    
+<section class="card" style="padding:18px">
+      <h1 class="page-title">Computer Animation</h1>
+      <p class="muted">
+        An animation exercise applying core principles such as timing, spacing, squash & stretch,
+        anticipation, and smooth keyframe control.
+      </p>
+      <div class="tags" style="margin-top:10px">
+        <span>Animation</span><span>Keyframes</span><span>Timing</span><span>Spacing</span>
+      </div>
+
+      <div class="animGrid">
+        <div class="poster">
+          <div class="posterInner">
+            <h2 style="margin:0 0 8px">Principles applied</h2>
+            <div class="principles">
+              <div class="p"><b>Timing</b><span>Controlled speed to show weight and intention.</span></div>
+              <div class="p"><b>Spacing</b><span>Smoother arcs using better in-between spacing.</span></div>
+              <div class="p"><b>Squash & Stretch</b><span>Added elasticity while keeping volume believable.</span></div>
+              <div class="p"><b>Anticipation</b><span>Small prep motion before the main action.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:14px">
+          <h3 style="margin-top:4px">Preview</h3>
+          <p class="muted" style="line-height:1.7">
+            Screenshots below are placeholders for now. Replace files in <b>/images</b> with your real PNGs
+            (keep the same names) and it will auto-update.
+          </p>
+
+          <div class="thumb" style="height:220px;border-radius:18px;margin-top:10px">
+            <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Computer Animation Cover" loading="lazy" decoding="async">
+          </div>
+
+          <div class="tags" style="margin-top:10px">
+            <span>Curves</span><span>Arcs</span><span>Polish</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Frames</h2>
+      <div class="card">
+        <div class="galleryGrid">
+          <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Computer Animation 1" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/ca2.png" alt="Computer Animation 2" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/ca3.png" alt="Computer Animation 3" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/ca4.png" alt="Computer Animation 4" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/ca5.png" alt="Computer Animation 5" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/ca6.png" alt="Computer Animation 6" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">Animation</span>
+    </footer>
+  </main>
+
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="modalBox">
+      <img class="modalImg" alt="">
+      <div class="modalBar">
+        <span id="modalCaption">Preview</span>
+        <button class="modalBtn" id="modalClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+<!-- Lightbox (click any image to zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside / press Esc to close</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Syahmi Zufayri — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="aura" aria-hidden="true"></div>
+
+  <!-- MUST be inside body -->
+  <div id="cursorGlow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">My Portfolio</a>
+      <nav class="links">
+        <a class="active" href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card hero-main reveal">
+        <div class="moving-bg" aria-hidden="true">
+          <span class="blob b1"></span>
+          <span class="blob b2"></span>
+          <span class="blob b3"></span>
+          <span class="grid-glow"></span>
+        </div>
+
+        <div class="topline">
+          <span class="pill">Portfolio</span>
+          <span class="pill">HTML • CSS • JS</span>
+          <span class="pill">Malaysia (GMT+8)</span>
+        </div>
+
+        <h1 class="h1">
+          Hi, I’m <span class="grad">Ahmad Syahmi Zufayri</span>
+        </h1>
+
+        <p class="role">
+          I’m a <span class="type" id="typeText"></span><span class="caret">|</span>
+        </p>
+
+        <p class="text">
+          I study and learn interactive projects and visual works — Unity learning games, OpenGL 3D modules,
+          motion graphics, and Blender experiments. This site shows my best work.
+        </p>
+
+        <div class="btns">
+          <a class="btn primary" href="projects.html">View Projects</a>
+          <a class="btn ghost" href="#featured">Featured</a>
+          <a class="btn soft" href="#contact">Contact</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="statNum">6+</div>
+            <div class="statLabel">Projects</div>
+          </div>
+          <div class="stat">
+            <div class="statNum">Unity</div>
+            <div class="statLabel">Interactive</div>
+          </div>
+          <div class="stat">
+            <div class="statNum">OpenGL</div>
+            <div class="statLabel">3D Module</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card side reveal">
+        <h2>Quick Info</h2>
+        <ul>
+          <li>Focus: Clean UI + Smooth presentation</li>
+          <li>Tools: Unity, C#, C++ OpenGL, After Effects, Blender</li>
+          <li>Style: minimalist, modern, readable</li>
+        </ul>
+        <p class="small">Tip: Put screenshots in <b>/images</b> and update filenames.</p>
+
+        <div class="miniLinks">
+          <a class="chip" href="projects.html">All Projects →</a>
+          <a class="chip" href="#contact">Email me →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section id="featured" class="section reveal">
+      <div class="sectionHead">
+        <h2>Featured Work</h2>
+        <p class="muted">A quick preview. Click to open the full project page.</p>
+      </div>
+
+      <div class="carousel" id="carousel">
+        <a class="slide active" href="projects/drag-and-drop-game.html">
+          <img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop" / loading="lazy" decoding="async">
+          <div class="cap">
+            <div class="capTitle">Flashcard + Drag & Drop Game</div>
+            <div class="capText">Unity learning game with timer, difficulty & audio.</div>
+          </div>
+        </a>
+
+        <a class="slide" href="projects/opengl-cafeteria.html">
+          <img class="zoomable" src="images/cf5.png" alt="OpenGL Cafeteria" / loading="lazy" decoding="async">
+          <div class="cap">
+            <div class="capTitle">OpenGL 3D Cafeteria Module</div>
+            <div class="capText">3D building built using primitives + matrix stack.</div>
+          </div>
+        </a>
+
+        <a class="slide" href="projects/blender-workshop.html">
+          <img class="zoomable" src="images/ws1.png" alt="Blender Workshop 2" / loading="lazy" decoding="async">
+          <div class="cap">
+            <div class="capTitle">Blender Workshop 2</div>
+            <div class="capText">3D modeling, materials, lighting & camera composition.</div>
+          </div>
+        </a>
+
+        <div class="dots" id="dots" aria-label="carousel controls"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section reveal" id="contact">
+      <div class="contactCard">
+        <div>
+          <h2>Contact</h2>
+          <p class="muted">Replace these links with your real ones anytime.</p>
+
+          <div class="contactLinks">
+            <a class="btn ghost" href="https://github.com/Mie02" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn ghost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn primary" href="mailto:ahmadsyahmi723@gmail.com">Email</a>
+          </div>
+        </div>
+
+        <div class="contactNote">
+          <div class="noteTitle">Want it more pro?</div>
+          <div class="noteText">
+            Add a real profile photo, a resume PDF, and 2–3 screenshots per project.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">HTML • CSS • JS</span>
+    </footer>
+  </main>
+
+  <div id="lightbox">
+  <img id="lightboxImg">
+</div>
+
+  <!-- IMPORTANT: script at bottom -->
+  <script src="script.js"></script>
+</body>
+
+</html>

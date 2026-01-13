@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drag & Drop Learning Game — Syahmi</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="../index.html">Syahmi</a>
+      <nav class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back" href="../projects.html">← Back to Projects</a>
+
+    <section class="ddLayout">
+      <div class="card ddLeft">
+        <h1 class="page-title">Drag & Drop Learning Game</h1>
+        <p class="muted">
+          A Unity-based interactive learning game focused on drag-and-drop matching with feedback.
+          Designed for clarity, smooth UI flow, and replayability.
+        </p>
+
+        <div class="tags" style="margin-top:10px">
+          <span>Unity</span><span>C#</span><span>UI/UX</span><span>Game Logic</span><span>Feedback</span>
+        </div>
+
+        <div class="timeline">
+          <div class="step">
+            <h4>Step 1 — Drag & Drop</h4>
+            <p>Players drag answers into slots. System checks if all slots are filled.</p>
+          </div>
+          <div class="step">
+            <h4>Step 2 — Validation</h4>
+            <p>Submit button validates each slot and gives correct/wrong feedback.</p>
+          </div>
+          <div class="step">
+            <h4>Step 3 — Scoring & Timer</h4>
+            <p>Points and timer create challenge; difficulty can change background/UI.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="galleryGrid ddGrid">
+          <img class="zoomable" data-modal="img" src="../images/dd1.png" alt="Drag & Drop screenshot 1" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/dd2.png" alt="Drag & Drop screenshot 2" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/dd3.png" alt="Drag & Drop screenshot 3" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/dd4.png" alt="Drag & Drop screenshot 4" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Highlights</h2>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="skillCard">
+          <div class="skillTitle">Clean UI Flow</div>
+          <div class="skillText">Easy to understand layout and button actions.</div>
+        </div>
+        <div class="skillCard">
+          <div class="skillTitle">User Feedback</div>
+          <div class="skillText">Immediate messages when slots are missing or incorrect.</div>
+        </div>
+        <div class="skillCard">
+          <div class="skillTitle">Expandable</div>
+          <div class="skillText">Can add hints, difficulty themes, and new question sets.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">Unity Project</span>
+    </footer>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="modalBox">
+      <img class="modalImg" alt="">
+      <div class="modalBar">
+        <span id="modalCaption">Preview</span>
+        <button class="modalBtn" id="modalClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+<!-- Lightbox (click any image to zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside / press Esc to close</div>
+  </div>
+</body>
+</html>

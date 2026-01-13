@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bujang Lapok Recreate — Syahmi</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .sceneWrap{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      background:rgba(255,255,255,.04);
+    }
+    .sceneTop{
+      padding:18px;
+      background:
+        radial-gradient(760px 260px at 25% 0%, rgba(255,102,153,.12), transparent 60%),
+        radial-gradient(760px 260px at 85% 10%, rgba(45,212,191,.12), transparent 60%);
+    }
+    .sceneGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      padding:12px;
+    }
+    @media (max-width:980px){ .sceneGrid{grid-template-columns:1fr} }
+    .shot{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.2);
+    }
+    .shot img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      display:block;
+      cursor:pointer;
+    }
+    .shot .meta{
+      padding:12px;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+    .shot .meta b{display:block;margin-bottom:4px}
+    .shot .meta span{opacity:.78;line-height:1.55;display:block}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="../index.html">Syahmi</a>
+      <nav class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back" href="../projects.html">← Back to Projects</a>
+
+    <section class="sceneWrap">
+      <div class="sceneTop">
+        <h1 class="page-title">Bujang Lapok Recreate</h1>
+        <p class="muted">
+          A scene/style study focusing on recreating mood, camera angle, and lighting.
+          This page uses a “scene breakdown” layout.
+        </p>
+        <div class="tags" style="margin-top:10px">
+          <span>Recreate</span><span>Cinematography</span><span>Lighting</span><span>Editing</span>
+        </div>
+      </div>
+
+      <div class="sceneGrid">
+        <div class="shot">
+          <img class="zoomable" data-modal="img" src="../images/bl1.jpg" alt="Bujang Lapok - Shot 1" loading="lazy" decoding="async">
+          <div class="meta">
+            <b>Shot 1 — Establishing</b>
+            <span>Wide framing to set the environment and mood.</span>
+          </div>
+        </div>
+
+        <div class="shot">
+          <img class="zoomable" data-modal="img" src="../images/bl2.jpg" alt="Bujang Lapok - Shot 2" loading="lazy" decoding="async">
+          <div class="meta">
+            <b>Shot 2 — Angle Match</b>
+            <span>Camera angle recreated to match original composition.</span>
+          </div>
+        </div>
+
+        <div class="shot">
+          <img class="zoomable" data-modal="img" src="../images/bl3.jpg" alt="Bujang Lapok - Shot 3" loading="lazy" decoding="async">
+          <div class="meta">
+            <b>Shot 3 — Mood Lighting</b>
+            <span>Lighting tuned to match tone and contrast.</span>
+          </div>
+        </div>
+
+        <div class="shot">
+          <img class="zoomable" data-modal="img" src="../images/bl4.png" alt="Bujang Lapok - Shot 4" loading="lazy" decoding="async">
+          <div class="meta">
+            <b>Shot 4 — Final Look</b>
+            <span>Final output with refined look and clarity.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>More Frames</h2>
+      <div class="card">
+        <div class="galleryGrid">
+          <img class="zoomable" data-modal="img" src="../images/bl1.jpg" alt="Bujang Lapok 1" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/bl2.jpg" alt="Bujang Lapok 2" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/bl3.jpg" alt="Bujang Lapok 3" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/bl4.png" alt="Bujang Lapok 4" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/bl5.png" alt="Bujang Lapok 5" loading="lazy" decoding="async">
+          <img class="zoomable" data-modal="img" src="../images/bl6.png" alt="Bujang Lapok 6" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Syahmi Zufayri</span>
+      <span class="muted">Scene Recreate</span>
+    </footer>
+  
+    <section class="section reveal">
+      <div class="sectionHead">
+        <h2>Video Showcase</h2>
+        <p class="muted">Watch a short highlight. Replace the link with your real video later.</p>
+      </div>
+
+      <div class="videoCard">
+        <div class="videoWrap">
+          <iframe
+            src="https://www.youtube.com/embed/ysz5S6PUM-U"
+            title="Bujang Lapok Recreate video"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="videoMeta">
+          <div class="capTitle">Bujang Lapok Recreate</div>
+          <div class="muted">Scene recreate / style study with camera angles & mood lighting.</div>
+        </div>
+      </div>
+    </section>
+    
+</main>
+
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="modalBox">
+      <img class="modalImg" alt="">
+      <div class="modalBar">
+        <span id="modalCaption">Preview</span>
+        <button class="modalBtn" id="modalClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+<!-- Lightbox (click any image to zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside / press Esc to close</div>
+  </div>
+</body>
+</html>
