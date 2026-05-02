@@ -1,94 +1,130 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Workshop 2 Blender & Premiere Pro — Syahmi</title>
-  <link rel="stylesheet" href="../style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blender Workshop 2 — Syahmi</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner">
-      <a class="logo" href="../index.html">Syahmi</a>
-      <nav class="links">
-        <a href="../index.html">Home</a>
-        <a href="../projects.html">Projects</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
+
+<div id="cursorGlow" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">SZ</a>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <a class="back" href="../projects.html">← Back to Projects</a>
+
+  <!-- HERO -->
+  <div class="card proj-hero" style="margin-bottom:20px;">
+    <div class="proj-hero-bg" style="background:
+      radial-gradient(700px 300px at 8% 0%, rgba(124,92,255,.20), transparent 60%),
+      radial-gradient(700px 300px at 92% 0%, rgba(45,212,191,.16), transparent 60%);">
     </div>
-  </header>
+    <h1 class="page-title">Blender Workshop 2</h1>
+    <p class="muted" style="max-width:560px;margin-top:10px;">
+      A Blender practice workshop covering modeling, materials, lighting, and clean render output.
+      Presented with a cinematic filmstrip layout to showcase the process.
+    </p>
+    <div class="tags" style="margin-top:16px;">
+      <span class="tag">Blender</span>
+      <span class="tag">Modeling</span>
+      <span class="tag">Materials</span>
+      <span class="tag">Lighting</span>
+      <span class="tag">Render</span>
+      <span class="tag">Premiere Pro</span>
+    </div>
+  </div>
 
-  <main class="container">
-    <a class="back" href="../projects.html">← Back to Projects</a>
-
-    <section class="card" style="padding:18px">
-      <h1 class="page-title">Workshop 2 Blender & Premiere Pro</h1>
-      <p class="muted">
-        A Blender practice workshop focusing on modeling, materials, lighting, and clean renders.
-        This page uses a filmstrip layout to feel more “cinematic”.
-      </p>
-      <div class="tags" style="margin-top:10px">
-        <span>Blender</span><span>Modeling</span><span>Materials</span><span>Lighting</span><span>Render</span>
+  <!-- FILMSTRIP -->
+  <section class="section">
+    <div class="section-head">
+      <div class="accent-line"></div>
+      <h2>Process Filmstrip</h2>
+      <p>Scroll horizontally or swipe. Click any image to enlarge.</p>
+    </div>
+    <div class="card" style="overflow:hidden;">
+      <div class="gallery-strip">
+        <img class="zoomable" src="../images/ws1.png" alt="Workshop 2 — 1" loading="lazy" decoding="async">
+        <img class="zoomable" src="../images/ws2.png" alt="Workshop 2 — 2" loading="lazy" decoding="async">
+        <img class="zoomable" src="../images/ws3.png" alt="Workshop 2 — 3" loading="lazy" decoding="async">
+        <img class="zoomable" src="../images/ws4.png" alt="Workshop 2 — 4" loading="lazy" decoding="async">
+        <img class="zoomable" src="../images/ws5.png" alt="Workshop 2 — 5" loading="lazy" decoding="async">
+        <img class="zoomable" src="../images/ws6.png" alt="Workshop 2 — 6" loading="lazy" decoding="async">
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-     <h2>Workshop 2 Process</h2>
-<p class="muted">Scroll horizontally (or swipe on mobile). Click to enlarge.</p>
+  <!-- VIDEOS -->
+  <section class="section reveal">
+    <div class="section-head">
+      <div class="accent-line"></div>
+      <h2>Video Showcase</h2>
+      <p>Environment build and Premiere Pro editing clips.</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-wrap">
+          <video controls muted preload="metadata">
+            <source src="../videos/ws2p.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption">Editing Video for Exhibition</div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrap">
+          <video controls muted preload="metadata">
+            <source src="../videos/ws2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption">Environment Build and Config</div>
+      </div>
+    </div>
+  </section>
 
-<div class="galleryStrip">
-  <div class="shot"><img class="zoomable" src="../images/ws1.png" alt="Workshop 2 - 1" loading="lazy" decoding="async"></div>
-  <div class="shot"><img class="zoomable" src="../images/ws2.png" alt="Workshop 2 - 2" loading="lazy" decoding="async"></div>
-  <div class="shot"><img class="zoomable" src="../images/ws3.png" alt="Workshop 2 - 3" loading="lazy" decoding="async"></div>
-  <div class="shot"><img class="zoomable" src="../images/ws4.png" alt="Workshop 2 - 4" loading="lazy" decoding="async"></div>
-  <div class="shot"><img class="zoomable" src="../images/ws5.png" alt="Workshop 2 - 5" loading="lazy" decoding="async"></div>
-  <div class="shot"><img class="zoomable" src="../images/ws6.png" alt="Workshop 2 - 6" loading="lazy" decoding="async"></div>
-</div>
-      
-    </section>
-
-    <section class="section">
+  <!-- WHAT I LEARNED -->
+  <section class="section reveal">
+    <div class="section-head">
+      <div class="accent-line"></div>
       <h2>What I learned</h2>
-      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-        <div class="skillCard">
-          <div class="skillTitle">Modeling Practice</div>
-          <div class="skillText">Cleaner shapes, consistent scale, better silhouettes.</div>
-        </div>
-        <div class="skillCard">
-          <div class="skillTitle">Lighting & Mood</div>
-          <div class="skillText">Using light placement to guide attention and style.</div>
-        </div>
-        <div class="skillCard">
-          <div class="skillTitle">Presentation</div>
-          <div class="skillText">Better framing and export for portfolio screenshots.</div>
-        </div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Modeling Practice</div>
+        <div class="skill-text">Cleaner shapes, consistent scale, better silhouettes across all objects.</div>
       </div>
-    </section>
-
-    <footer class="footer">
-      <span>© <span id="year"></span> Syahmi Zufayri</span>
-      <span class="muted">Blender Project</span>
-    </footer>
-  </main>
-
-  <!-- Modal -->
-  <div class="modal" id="imgModal" aria-hidden="true">
-    <div class="modalBox">
-      <img class="modalImg" alt="">
-      <div class="modalBar">
-        <span id="modalCaption">Preview</span>
-        <button class="modalBtn" id="modalClose">Close</button>
+      <div class="skill-card">
+        <div class="skill-title">Lighting & Mood</div>
+        <div class="skill-text">Using light placement to guide attention and define visual style.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Presentation</div>
+        <div class="skill-text">Better framing and export workflow for portfolio-ready screenshots.</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <script src="../script.js"></script>
-<!-- Lightbox (click any image to zoom) -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
-    <img id="lightboxImg" alt="Zoomed image" />
-    <div class="lightboxHint">Click outside / press Esc to close</div>
-  </div>
+  <footer class="footer">
+    <span class="logo-f">Syahmi Zufayri</span>
+    <span class="muted">© <span id="year"></span> · Blender / Premiere Pro</span>
+  </footer>
+</main>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightboxClose" id="lightboxClose" aria-label="Close">×</button>
+  <img id="lightboxImg" alt="Zoomed image">
+  <div class="lightboxHint">Click outside or press Esc to close</div>
+</div>
+
+<script src="../script.js"></script>
 </body>
 </html>
-

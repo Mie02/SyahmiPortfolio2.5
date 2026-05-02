@@ -1,239 +1,181 @@
-// -------------------------
-// Helpers
-// -------------------------
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => Array.from(document.querySelectorAll(s));
+// ── Helpers ──────────────────────────────────────────────
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-// -------------------------
-// Parallax (SAFE)
-// -------------------------
-window.addEventListener("scroll", () => {
-  const hero = $(".hero");
-  if (!hero) return;
-  const y = window.scrollY || 0;
-  hero.style.transform = `translateY(${y * 0.2}px)`;
-});
-
-// -------------------------
-// DOM Ready
-// -------------------------
-document.addEventListener("DOMContentLoaded", () => {
-  // footer year
-  const y = $("#year");
+// ── DOMContentLoaded ──────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Footer year
+  const y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // typing effect
+  // Typing effect
   const roles = [
-    "Unity Developer",
-    "Motion Graphics Editor",
-    "OpenGL 3D Builder",
-    "Computer Animation Learner",
-    "Blender Workshop Creator",
+    'Unity Developer',
+    'Motion Graphics Editor',
+    'OpenGL 3D Builder',
+    'Computer Animator',
+    'Blender Creator',
   ];
-  const el = $("#typeText");
+  const el = $('#typeText');
   if (el) typeLoop(el, roles);
 
-  // carousel
+  // Carousel
   initCarousel();
 
-  // scroll reveal (FIXED: uses 'active' to match your CSS)
+  // Scroll reveal
   initReveal();
 
-  // cursor glow safe
+  // Cursor glow
   initCursorGlow();
+
+  // Lightbox
+  initLightbox();
+
+  // Active nav
+  markActiveNav();
 });
 
-// -------------------------
-// Typing loop
-// -------------------------
+// ── Typing ────────────────────────────────────────────────
 function typeLoop(el, items) {
   let i = 0, j = 0, deleting = false;
-
   function tick() {
     const word = items[i];
     el.textContent = word.slice(0, j);
-
     if (!deleting) {
       j++;
-      if (j > word.length) {
-        deleting = true;
-        setTimeout(tick, 900);
-        return;
-      }
+      if (j > word.length) { deleting = true; setTimeout(tick, 1000); return; }
     } else {
       j--;
-      if (j === 0) {
-        deleting = false;
-        i = (i + 1) % items.length;
-      }
+      if (j === 0) { deleting = false; i = (i + 1) % items.length; }
     }
-
-    setTimeout(tick, deleting ? 40 : 55);
+    setTimeout(tick, deleting ? 36 : 52);
   }
-
   tick();
 }
 
-// -------------------------
-// Reveal
-// -------------------------
+// ── Reveal ────────────────────────────────────────────────
 function initReveal() {
-  const reveals = $$(".reveal");
+  const reveals = $$('.reveal');
   if (!reveals.length) return;
-
-  if (!("IntersectionObserver" in window)) {
-    reveals.forEach((r) => r.classList.add("active"));
-    return;
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(r => r.classList.add('active')); return;
   }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) e.target.classList.add("active");
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  reveals.forEach((r) => io.observe(r));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+  }, { threshold: 0.10 });
+  reveals.forEach(r => io.observe(r));
 }
 
-// -------------------------
-// Carousel
-// -------------------------
+// ── Carousel ──────────────────────────────────────────────
 function initCarousel() {
-  const carousel = $("#carousel");
-  const dotsWrap = $("#dots");
-  if (!carousel || !dotsWrap) return;
+  const wrap = $('#carousel');
+  const track = $('#carouselTrack');
+  const dotsWrap = $('#dots');
+  const prevBtn = $('#carouselPrev');
+  const nextBtn = $('#carouselNext');
+  if (!wrap || !track || !dotsWrap) return;
 
-  const slides = Array.from(carousel.querySelectorAll(".slide"));
+  const slides = $$('.slide', track) || Array.from(track.children);
   if (!slides.length) return;
 
-  dotsWrap.innerHTML = "";
+  let current = 0;
+  let timer = setInterval(next, 4000);
 
+  dotsWrap.innerHTML = '';
   slides.forEach((_, idx) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "dot" + (idx === 0 ? " active" : "");
-    b.addEventListener("click", () => go(idx));
+    const b = document.createElement('button');
+    b.className = 'dot' + (idx === 0 ? ' active' : '');
+    b.setAttribute('aria-label', 'Slide ' + (idx + 1));
+    b.addEventListener('click', () => go(idx));
     dotsWrap.appendChild(b);
   });
-
-  const dots = Array.from(dotsWrap.querySelectorAll(".dot"));
-  let current = 0;
-  let timer = setInterval(next, 3500);
+  const dots = $$('.dot', dotsWrap);
 
   function go(idx) {
-    slides[current].classList.remove("active");
-    dots[current].classList.remove("active");
-
     current = idx;
-
-    slides[current].classList.add("active");
-    dots[current].classList.add("active");
-
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     reset();
   }
+  function next() { go((current + 1) % slides.length); }
+  function reset() { clearInterval(timer); timer = setInterval(next, 4000); }
 
-  function next() {
-    go((current + 1) % slides.length);
-  }
-
-  function reset() {
-    clearInterval(timer);
-    timer = setInterval(next, 3500);
-  }
-
-  carousel.addEventListener("mouseenter", () => clearInterval(timer));
-  carousel.addEventListener("mouseleave", reset);
+  if (prevBtn) prevBtn.addEventListener('click', () => go((current - 1 + slides.length) % slides.length));
+  if (nextBtn) nextBtn.addEventListener('click', next);
+  wrap.addEventListener('mouseenter', () => clearInterval(timer));
+  wrap.addEventListener('mouseleave', reset);
 }
 
-// -------------------------
-// Cursor glow (SAFE)
-// -------------------------
+// ── Cursor Glow ───────────────────────────────────────────
 function initCursorGlow() {
-  const glow = $("#cursorGlow");
+  const glow = $('#cursorGlow');
   if (!glow) return;
-
-  document.addEventListener("mousemove", (e) => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
-  });
+  let lx = 0, ly = 0, x = 0, y = 0;
+  document.addEventListener('mousemove', e => { x = e.clientX; y = e.clientY; });
+  function frame() {
+    lx += (x - lx) * 0.08;
+    ly += (y - ly) * 0.08;
+    glow.style.left = lx + 'px';
+    glow.style.top  = ly + 'px';
+    requestAnimationFrame(frame);
+  }
+  frame();
 }
 
-// -------------------------
-// Image zoom (Lightbox)
-// - Click any .zoomable image OR img[data-modal="img"]
-// - Close: click outside, X button, or Esc
-// -------------------------
-(function initLightbox(){
-  // If a page doesn't include the lightbox markup, inject it automatically.
-  if (!document.getElementById("lightbox")) {
-    const wrap = document.createElement("div");
-    wrap.innerHTML = `
+// ── Lightbox ──────────────────────────────────────────────
+function initLightbox() {
+  if (!document.getElementById('lightbox')) {
+    const d = document.createElement('div');
+    d.innerHTML = `
       <div id="lightbox" class="lightbox" aria-hidden="true">
-        <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">×</button>
-        <img id="lightboxImg" alt="Zoomed image" />
-        <div class="lightboxHint">Click outside / press Esc to close</div>
+        <button class="lightboxClose" id="lightboxClose" aria-label="Close">×</button>
+        <img id="lightboxImg" alt="Zoomed image">
+        <div class="lightboxHint">Click outside or press Esc to close</div>
       </div>`;
-    document.body.appendChild(wrap.firstElementChild);
+    document.body.appendChild(d.firstElementChild);
   }
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const btn = document.getElementById('lightboxClose');
 
-  const lb = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lightboxImg");
-  const btn = document.getElementById("lightboxClose");
-
-  function open(src){
-    if(!lb || !lbImg) return;
+  function open(src) {
     lbImg.src = src;
-    lb.style.display = "flex";
-    lb.setAttribute("aria-hidden", "false");
-    document.body.classList.add("noScroll");
+    lb.style.display = 'flex';
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('noScroll');
+  }
+  function close() {
+    lb.style.display = 'none';
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('noScroll');
+    lbImg.src = '';
   }
 
-  function close(){
-    if(!lb) return;
-    lb.style.display = "none";
-    lb.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("noScroll");
-    if(lbImg) lbImg.src = "";
-  }
-
-  document.addEventListener("click", (e) => {
+  document.addEventListener('click', e => {
     const t = e.target;
-    if(!(t instanceof HTMLElement)) return;
-
-    const isZoomable = t.classList.contains("zoomable");
-    const isModalImg = t.tagName === "IMG" && t.getAttribute("data-modal") === "img";
-    if(isZoomable || isModalImg){
-      const src = (t instanceof HTMLImageElement) ? (t.dataset.zoom || t.currentSrc || t.src) : "";
-      if(src) open(src);
+    if (t.classList.contains('zoomable') && t.tagName === 'IMG') {
+      open(t.dataset.zoom || t.currentSrc || t.src);
     }
   });
+  lb?.addEventListener('click', e => { if (e.target === lb) close(); });
+  btn?.addEventListener('click', e => { e.preventDefault(); close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
-  // Close on background click
-  lb?.addEventListener("click", (e) => {
-    if(e.target === lb) close();
-  });
-
-  // Prevent closing when clicking the image
-  lbImg?.addEventListener("click", (e) => e.stopPropagation());
-
-  btn?.addEventListener("click", (e) => { e.preventDefault(); close(); });
-
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") close();
-  });
-
-  // Fallback: if any image fails to load, swap to placeholder
-  document.querySelectorAll('img').forEach((img) => {
-    img.addEventListener("error", () => {
-      if(img.dataset.fallbackApplied) return;
-      img.dataset.fallbackApplied = "1";
-      // try a local placeholder
-      img.src = img.src.includes("/images/") || img.src.includes("images/")
-        ? img.src.replace(/images\/[^/]+$/, "images/placeholder.png")
-        : "images/placeholder.png";
+  // Fallback for broken images
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', () => {
+      if (img.dataset.fallbackApplied) return;
+      img.dataset.fallbackApplied = '1';
+      img.src = 'images/placeholder.png';
     });
   });
-})();
+}
+
+// ── Mark active nav link ───────────────────────────────────
+function markActiveNav() {
+  const path = location.pathname.split('/').pop() || 'index.html';
+  $$('.nav-links a').forEach(a => {
+    const href = a.getAttribute('href').split('/').pop();
+    if (href === path) a.classList.add('active');
+  });
+}
