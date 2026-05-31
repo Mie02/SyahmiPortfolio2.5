@@ -1,144 +1,145 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Computer Animation — Syahmi</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta name="description" content="Computer animation project applying 12 principles of animation including timing, spacing, squash and stretch." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-
-<div id="cursorGlow" aria-hidden="true"></div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo" href="../index.html">SZ</a>
-    <nav class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="../projects.html">Projects</a>
-      <a href="../index.html#contact">Contact</a>
-    </nav>
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
   </div>
-</header>
+  <div id="cursorGlow" aria-hidden="true"></div>
 
-<main class="container">
-  <a class="back" href="../projects.html">← Back to Projects</a>
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="../index.html">Syahmi<span class="logo-dot">.</span></a>
+      <nav class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-  <!-- HERO -->
-  <div class="card proj-hero" style="margin-bottom:20px;">
-    <div class="proj-hero-bg" style="background:
-      radial-gradient(700px 300px at 20% 0%, rgba(45,212,191,.16), transparent 60%),
-      radial-gradient(700px 300px at 85% 0%, rgba(255,102,153,.14), transparent 60%);">
-    </div>
-    <h1 class="page-title">Computer Animation</h1>
-    <p class="muted" style="max-width:560px;margin-top:10px;">
-      An animation exercise applying core principles: timing, spacing, squash & stretch,
-      anticipation, and smooth keyframe control.
-    </p>
-    <div class="tags" style="margin-top:16px;">
-      <span class="tag">Animation</span>
-      <span class="tag">Keyframes</span>
-      <span class="tag">Timing</span>
-      <span class="tag">Spacing</span>
-    </div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="../index.html">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../index.html#contact">Contact</a>
   </div>
 
-  <!-- SPLIT: principles + preview -->
-  <div class="split section">
-    <div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:20px;">Principles applied</h2>
-      <div class="timeline">
-        <div class="step">
-          <div>
-            <h4>Timing</h4>
-            <p>Controlled speed to convey weight, intent, and character emotion.</p>
+  <main class="container">
+    <a class="back" href="../projects.html">&larr; Back to Projects</a>
+
+    <section class="card reveal" style="padding:26px;margin-top:16px" aria-labelledby="projectTitle">
+      <h1 class="page-title" id="projectTitle">Computer <span class="grad">Animation</span> Project</h1>
+      <p class="muted">
+        An animation exercise applying core principles such as timing, spacing, squash &amp; stretch, anticipation, and smooth keyframe control.
+      </p>
+      <div class="tags" style="margin-top:12px">
+        <span>Animation</span><span>Keyframes</span><span>Timing</span><span>Spacing</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:20px" class="anim-intro">
+        <div style="background:var(--grad-subtle);border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:20px">
+          <h2 style="margin-bottom:14px">Principles <span class="grad">Applied</span></h2>
+          <div style="display:grid;gap:10px">
+            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
+              <b>Timing</b>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Controlled speed to show weight and intention.</p>
+            </div>
+            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
+              <b>Spacing</b>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Smoother arcs using better in-between spacing.</p>
+            </div>
+            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
+              <b>Squash &amp; Stretch</b>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Added elasticity while keeping volume believable.</p>
+            </div>
+            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
+              <b>Anticipation</b>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Small prep motion before the main action.</p>
+            </div>
           </div>
         </div>
-        <div class="step">
-          <div>
-            <h4>Spacing</h4>
-            <p>Smoother arcs using improved in-between frame spacing.</p>
+        <div class="card" style="overflow:hidden">
+          <div class="thumb" style="height:280px">
+            <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Computer Animation cover frame" loading="lazy" decoding="async">
           </div>
-        </div>
-        <div class="step">
-          <div>
-            <h4>Squash & Stretch</h4>
-            <p>Added elasticity while keeping volume believable throughout.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div>
-            <h4>Anticipation</h4>
-            <p>Small prep motion before the main action to signal intent.</p>
+          <div style="padding:14px">
+            <div class="tags">
+              <span>Curves</span><span>Arcs</span><span>Polish</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="card" style="overflow:hidden;">
-      <img class="zoomable" src="../images/ca1.png" alt="Computer Animation Cover"
-           loading="lazy" decoding="async"
-           style="width:100%;height:300px;object-fit:cover;cursor:zoom-in;">
-    </div>
-  </div>
-
-  <!-- VIDEO GRID -->
-  <section class="section reveal">
-    <div class="section-head">
-      <div class="accent-line"></div>
-      <h2>Video Showcase</h2>
-      <p>Animation clips and renders.</p>
-    </div>
-    <div class="video-grid">
-      <div class="video-card">
-        <div class="video-wrap">
+    <section class="section reveal" aria-labelledby="videoTitle">
+      <div class="sectionHead">
+        <div>
+          <h2 id="videoTitle">Video <span class="grad">Showcase</span></h2>
+          <p class="muted">Watch animation highlights.</p>
+        </div>
+      </div>
+      <div class="videoGrid">
+        <div class="videoCard">
           <video controls preload="metadata">
             <source src="../videos/motion1.mp4" type="video/mp4">
           </video>
+          <div class="videoCaption">Kinetic Typography Intro</div>
         </div>
-        <div class="video-caption">Kinetic Typography Intro</div>
-      </div>
-      <div class="video-card">
-        <div class="video-wrap">
+        <div class="videoCard">
           <video controls preload="metadata">
             <source src="../videos/motion2.mp4" type="video/mp4">
           </video>
+          <div class="videoCaption">Transition Montage</div>
         </div>
-        <div class="video-caption">Transition Montage</div>
+        <div class="videoCard">
+          <video controls preload="metadata">
+            <source src="../videos/motion3.mp4" type="video/mp4">
+          </video>
+          <div class="videoCaption">Beat Sync Edit</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FRAMES -->
-  <section class="section reveal">
-    <div class="section-head">
-      <div class="accent-line"></div>
-      <h2>Frames</h2>
-    </div>
-    <div class="card">
-      <div class="gallery-grid">
-        <img class="zoomable" src="../images/ca1.png" alt="CA 1" loading="lazy" decoding="async">
-        <img class="zoomable" src="../images/ca2.png" alt="CA 2" loading="lazy" decoding="async">
-        <img class="zoomable" src="../images/ca3.png" alt="CA 3" loading="lazy" decoding="async">
-        <img class="zoomable" src="../images/ca4.png" alt="CA 4" loading="lazy" decoding="async">
-        <img class="zoomable" src="../images/ca5.png" alt="CA 5" loading="lazy" decoding="async">
-        <img class="zoomable" src="../images/ca6.png" alt="CA 6" loading="lazy" decoding="async">
+    <section class="section reveal" aria-labelledby="framesTitle">
+      <h2 id="framesTitle">Animation <span class="grad">Frames</span></h2>
+      <div class="card" style="margin-top:16px">
+        <div class="galleryGrid">
+          <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Animation frame 1" loading="lazy" decoding="async" style="grid-column:span 4">
+          <img class="zoomable" data-modal="img" src="../images/ca2.png" alt="Animation frame 2" loading="lazy" decoding="async" style="grid-column:span 4">
+          <img class="zoomable" data-modal="img" src="../images/ca3.png" alt="Animation frame 3" loading="lazy" decoding="async" style="grid-column:span 4">
+          <img class="zoomable" data-modal="img" src="../images/ca4.png" alt="Animation frame 4" loading="lazy" decoding="async" style="grid-column:span 4">
+          <img class="zoomable" data-modal="img" src="../images/ca5.png" alt="Animation frame 5" loading="lazy" decoding="async" style="grid-column:span 4">
+          <img class="zoomable" data-modal="img" src="../images/ca6.png" alt="Animation frame 6" loading="lazy" decoding="async" style="grid-column:span 4">
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <span class="logo-f">Syahmi Zufayri</span>
-    <span class="muted">© <span id="year"></span> · Computer Animation</span>
-  </footer>
-</main>
+    <footer class="footer">
+      <span>&copy; <span id="year"></span> Ahmad Syahmi Zufayri</span>
+      <span class="muted">Animation</span>
+    </footer>
+  </main>
 
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <button class="lightboxClose" id="lightboxClose" aria-label="Close">×</button>
-  <img id="lightboxImg" alt="Zoomed image">
-  <div class="lightboxHint">Click outside or press Esc to close</div>
-</div>
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside or press Esc to close</div>
+  </div>
 
-<script src="../script.js"></script>
+  <script src="../script.js"></script>
 </body>
 </html>

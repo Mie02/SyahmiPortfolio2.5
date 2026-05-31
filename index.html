@@ -1,220 +1,298 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Syahmi Zufayri — Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ahmad Syahmi Zufayri — Interactive Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Ahmad Syahmi Zufayri — Unity developer, OpenGL 3D builder, motion graphics editor, and Blender creator based in Malaysia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<div id="cursorGlow" aria-hidden="true"></div>
-
-<!-- NAV -->
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html">SZ</a>
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="#logbook">Logbook</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- Animated mesh background -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
   </div>
-</header>
 
-<main class="container">
+  <!-- Cursor glow -->
+  <div id="cursorGlow" aria-hidden="true"></div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="card hero-main">
-      <div class="blob-wrap" aria-hidden="true">
-        <span class="blob b1"></span>
-        <span class="blob b2"></span>
-        <span class="blob b3"></span>
-      </div>
-
-      <div class="topline">
-        <span class="pill">Portfolio</span>
-        <span class="pill">Malaysia · GMT+8</span>
-        <span class="pill">Available for work</span>
-      </div>
-
-      <h1 class="h1">
-        Hi, I'm<br><span class="grad">Ahmad Syahmi Zufayri</span>
-      </h1>
-
-      <p class="role">
-        I'm a <span class="type" id="typeText"></span><span class="caret">|</span>
-      </p>
-
-      <p class="hero-desc">
-        I build interactive experiences and visual work — Unity learning games, OpenGL 3D modules,
-        motion graphics, and Blender renders. This site showcases my best projects.
-      </p>
-
-      <div class="btns">
-        <a class="btn primary" href="projects.html">View Projects</a>
-        <a class="btn ghost" href="#featured">Featured Work</a>
-        <a class="btn teal" href="#contact">Contact</a>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <div class="statNum">6+</div>
-          <div class="statLabel">Projects</div>
-        </div>
-        <div class="stat">
-          <div class="statNum">Unity</div>
-          <div class="statLabel">Interactive</div>
-        </div>
-        <div class="stat">
-          <div class="statNum">OpenGL</div>
-          <div class="statLabel">3D Module</div>
-        </div>
-        <div class="stat">
-          <div class="statNum">Blender</div>
-          <div class="statLabel">3D Art</div>
-        </div>
-      </div>
+  <!-- Navbar -->
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Syahmi<span class="logo-dot">.</span></a>
+      <nav class="links" aria-label="Main navigation">
+        <a class="active" href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="#logbook">Logbook</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <div class="card hero-side">
-      <div>
-        <h2>Quick Info</h2>
-        <div class="info-row">
-          <div class="info-item">
-            <span class="info-dot"></span>
-            <div>
-              <div class="info-label small">Focus</div>
-              <div class="info-val">Clean UI + Smooth presentation</div>
-            </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="#logbook">Logbook</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <main class="container">
+
+    <!-- ======================== HERO ======================== -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-main card reveal">
+        <div class="hero-bg" aria-hidden="true">
+          <span class="blob b1"></span>
+          <span class="blob b2"></span>
+          <span class="blob b3"></span>
+          <span class="grid-glow"></span>
+        </div>
+
+        <div class="topline">
+          <span class="pill">Portfolio 2.0</span>
+          <span class="pill">HTML &bull; CSS &bull; JS</span>
+          <span class="pill">Malaysia (GMT+8)</span>
+        </div>
+
+        <h1 class="h1" id="heroTitle">
+          Hi, I'm <span class="grad">Ahmad Syahmi Zufayri</span>
+        </h1>
+
+        <p class="role">
+          I'm a <span class="type" id="typeText"></span><span class="caret" aria-hidden="true">|</span>
+        </p>
+
+        <p class="hero-desc">
+          I study and build interactive projects and visual works — Unity learning games, OpenGL 3D modules, motion graphics, and Blender experiments. This site showcases my best work.
+        </p>
+
+        <div class="btns">
+          <a class="btn primary" href="projects.html">View Projects</a>
+          <a class="btn ghost" href="#featured">Featured</a>
+          <a class="btn soft" href="#contact">Contact</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="statNum grad">6+</div>
+            <div class="statLabel">Projects</div>
           </div>
-          <div class="info-item">
-            <span class="info-dot" style="background:var(--teal)"></span>
-            <div>
-              <div class="info-label small">Style</div>
-              <div class="info-val">Minimalist · Modern · Readable</div>
-            </div>
+          <div class="stat">
+            <div class="statNum grad">Unity</div>
+            <div class="statLabel">Interactive</div>
+          </div>
+          <div class="stat">
+            <div class="statNum grad">OpenGL</div>
+            <div class="statLabel">3D Module</div>
           </div>
         </div>
       </div>
 
-      <div>
-        <h2>Tools</h2>
-        <div class="chip-row">
-          <span class="chip">Unity</span>
-          <span class="chip">C#</span>
-          <span class="chip">C++ / OpenGL</span>
-          <span class="chip">After Effects</span>
-          <span class="chip">Blender</span>
-          <span class="chip">Premiere Pro</span>
+      <div class="hero-side">
+        <div class="card side-card reveal" style="transition-delay:.1s">
+          <h2>Quick Info</h2>
+          <ul>
+            <li>Focus: Clean UI + Smooth presentation</li>
+            <li>Tools: Unity, C#, C++ OpenGL, After Effects, Blender</li>
+            <li>Style: Minimalist, modern, readable</li>
+          </ul>
+          <div class="miniLinks">
+            <a class="chip" href="projects.html">All Projects &rarr;</a>
+            <a class="chip" href="#contact">Email me &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card skill-mini reveal" style="transition-delay:.2s">
+          <div class="skill-label">Skills</div>
+          <div class="skill-tags">
+            <span>Unity</span><span>C#</span><span>C++</span>
+            <span>OpenGL</span><span>GLSL</span><span>Blender</span>
+            <span>After Effects</span><span>HTML/CSS</span><span>JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== FEATURED CAROUSEL ======================== -->
+    <section id="featured" class="section reveal" aria-labelledby="featuredTitle">
+      <div class="sectionHead">
+        <div>
+          <h2 id="featuredTitle">Featured <span class="grad">Work</span></h2>
+          <p class="muted">Click to open the full project page.</p>
         </div>
       </div>
 
-      <div>
-        <h2>Links</h2>
-        <div class="chip-row">
-          <a class="chip" href="https://github.com/Mie02" target="_blank" rel="noreferrer">GitHub →</a>
-          <a class="chip" href="projects.html">All Projects →</a>
-          <a class="chip" href="mailto:ahmadsyahmi723@gmail.com">Email →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FEATURED -->
-  <section id="featured" class="section reveal">
-    <div class="section-head">
-      <div class="accent-line"></div>
-      <h2>Featured Work</h2>
-      <p>A quick preview — click to open the full project page.</p>
-    </div>
-
-    <div class="carousel-wrap" id="carousel">
-      <div class="carousel" id="carouselTrack">
-        <a class="slide" href="projects/drag-and-drop-game.html">
-          <img src="images/dd3.png" alt="Flashcard + Drag & Drop" loading="lazy" decoding="async">
+      <div class="carousel" id="carousel" role="region" aria-label="Featured projects slideshow">
+        <a class="slide active" href="projects/drag-and-drop-game.html">
+          <img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop Game screenshot" loading="lazy" decoding="async">
           <div class="cap">
-            <div class="capTitle">Flashcard + Drag & Drop Game</div>
-            <div class="capText">Unity learning game with timer, difficulty modes & audio feedback.</div>
+            <div class="capTitle">Flashcard + Drag &amp; Drop Game</div>
+            <div class="capText">Unity learning game with timer, difficulty &amp; audio.</div>
           </div>
         </a>
         <a class="slide" href="projects/opengl-cafeteria.html">
-          <img src="images/cf5.png" alt="OpenGL Cafeteria" loading="lazy" decoding="async">
+          <img class="zoomable" src="images/cf5.png" alt="OpenGL 3D Cafeteria screenshot" loading="lazy" decoding="async">
           <div class="cap">
             <div class="capTitle">OpenGL 3D Cafeteria Module</div>
-            <div class="capText">3D building built using primitives + matrix stack transformations.</div>
+            <div class="capText">3D building built using primitives + matrix stack.</div>
           </div>
         </a>
         <a class="slide" href="projects/blender-workshop-2.html">
-          <img src="images/ws1.png" alt="Blender Workshop 2" loading="lazy" decoding="async">
+          <img class="zoomable" src="images/ws1.png" alt="Blender Workshop 2 screenshot" loading="lazy" decoding="async">
           <div class="cap">
             <div class="capTitle">Blender Workshop 2</div>
-            <div class="capText">3D modeling, materials, lighting & camera composition.</div>
+            <div class="capText">3D modeling, materials, lighting &amp; camera composition.</div>
+          </div>
+        </a>
+        <div class="dots" id="dots" role="tablist" aria-label="Carousel navigation"></div>
+        <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous slide">&#8249;</button>
+        <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next slide">&#8250;</button>
+      </div>
+    </section>
+
+    <!-- ======================== PROJECTS PREVIEW ======================== -->
+    <section class="section reveal" aria-labelledby="projectsPreviewTitle">
+      <div class="sectionHead">
+        <div>
+          <h2 id="projectsPreviewTitle">All <span class="grad">Projects</span></h2>
+          <p class="muted">A collection of my interactive and visual works.</p>
+        </div>
+        <a class="chip" href="projects.html">View All &rarr;</a>
+      </div>
+
+      <div class="grid projects-grid">
+        <a class="project-card reveal" href="projects/drag-and-drop-game.html" style="transition-delay:.05s">
+          <div class="thumb"><img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop Game" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Flashcard + Drag &amp; Drop Game</h3>
+            <p>Unity learning game with difficulty modes, timer, scoring &amp; audio.</p>
+            <div class="tags"><span>Unity</span><span>C#</span><span>UI/UX</span><span>Game Logic</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" href="projects/opengl-cafeteria.html" style="transition-delay:.1s">
+          <div class="thumb"><img class="zoomable" src="images/cf5.png" alt="OpenGL 3D Cafeteria Module" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>OpenGL 3D Cafeteria Module</h3>
+            <p>3D building using primitives, transformations &amp; matrix stack (GLUT).</p>
+            <div class="tags"><span>OpenGL</span><span>C++</span><span>3D</span><span>GLUT</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" href="projects/motion-graphics.html" style="transition-delay:.15s">
+          <div class="thumb"><img class="zoomable" src="images/mg3.png" alt="Motion Graphics Video" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Motion Graphics</h3>
+            <p>Kinetic typography + clean transitions + music sync.</p>
+            <div class="tags"><span>Editing</span><span>Typography</span><span>Motion</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" href="projects/computer-animation.html" style="transition-delay:.2s">
+          <div class="thumb"><img class="zoomable" src="images/ca1.png" alt="Computer Animation Project" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Computer Animation</h3>
+            <p>Animation principles: timing, spacing, squash &amp; stretch.</p>
+            <div class="tags"><span>Animation</span><span>Keyframes</span><span>Principles</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" href="projects/blender-workshop-2.html" style="transition-delay:.25s">
+          <div class="thumb"><img class="zoomable" src="images/ws5.png" alt="Blender Workshop 2" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Blender Workshop 2</h3>
+            <p>Modeling + materials + lighting + render workflow + camera.</p>
+            <div class="tags"><span>Blender</span><span>Modeling</span><span>Lighting</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" href="projects/bujang-lapok.html" style="transition-delay:.3s">
+          <div class="thumb"><img class="zoomable" src="images/bl1.jpg" alt="Bujang Lapok Recreate" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Bujang Lapok Recreate</h3>
+            <p>Scene/style study with camera angles &amp; mood lighting.</p>
+            <div class="tags"><span>Recreate</span><span>Cinematography</span><span>Lighting</span></div>
           </div>
         </a>
       </div>
+    </section>
 
-      <button class="carousel-prev" id="carouselPrev" aria-label="Previous">‹</button>
-      <button class="carousel-next" id="carouselNext" aria-label="Next">›</button>
-      <div class="dots" id="dots"></div>
-    </div>
-  </section>
-
-  <!-- LOGBOOK -->
-  <section class="section reveal" id="logbook">
-    <div class="section-head">
-      <div class="accent-line"></div>
-      <h2>Logbook</h2>
-      <p>Official weekly logbook submitted for academic and supervisor review.</p>
-    </div>
-
-    <div class="logbook-card">
-      <div>
-        <h3>Industrial Training / Course Logbook</h3>
-        <p>
-          Contains weekly progress records, activities, tools used,
-          screenshots, reflections, and supervisor verification.
-        </p>
-        <div class="logbook-btns">
-          <a href="assests/pdf/Syahmi_LogBook.pdf" target="_blank" class="btn primary">📄 View PDF</a>
-          <a href="assests/pdf/Syahmi_LogBook.pdf" download class="btn ghost">⬇ Download</a>
+    <!-- ======================== CONTACT ======================== -->
+    <section class="section reveal" id="contact" aria-labelledby="contactTitle">
+      <div class="contactCard card">
+        <div class="contact-main">
+          <h2 id="contactTitle">Let's <span class="grad">Connect</span></h2>
+          <p class="muted">Open to collaborations, feedback, and opportunities.</p>
+          <div class="contactLinks">
+            <a class="btn primary" href="mailto:ahmadsyahmi723@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              Email Me
+            </a>
+            <a class="btn ghost" href="https://github.com/Mie02" target="_blank" rel="noreferrer noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a class="btn ghost" href="#" target="_blank" rel="noreferrer noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="contact-note card">
+          <div class="noteTitle">Open to Opportunities</div>
+          <div class="noteText">
+            Internships, freelance projects, game dev collaborations, and academic work.
+          </div>
         </div>
       </div>
-      <div class="logbook-icon">LOG</div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section class="section reveal" id="contact">
-    <div class="contact-card">
-      <div>
-        <h2>Get in touch</h2>
-        <p>Open to opportunities, collaborations, or just a conversation.</p>
-        <div class="contact-links">
-          <a class="btn primary" href="mailto:ahmadsyahmi723@gmail.com">Email me</a>
-          <a class="btn ghost" href="https://github.com/Mie02" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn ghost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+    <!-- ======================== LOGBOOK ======================== -->
+    <section class="logbook reveal" id="logbook" aria-labelledby="logbookTitle">
+      <div class="section-head">
+        <h2 id="logbookTitle">Logbook &amp; <span class="grad">Documentation</span></h2>
+        <p>Official weekly logbook submitted for academic and supervisor review.</p>
+      </div>
+      <div class="logbook-card card">
+        <div class="logbook-info">
+          <h3>Industrial Training / Course Logbook</h3>
+          <p>Contains weekly progress records, activities, tools used, screenshots, reflections, and supervisor verification.</p>
+          <div class="logbook-actions">
+            <a href="assests/pdf/Syahmi_LogBook.pdf" target="_blank" class="btn primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              View Logbook (PDF)
+            </a>
+            <a href="assests/pdf/Syahmi_LogBook.pdf" download class="btn ghost">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
         </div>
       </div>
-      <div style="font-size:52px;opacity:.08;font-family:'Syne',sans-serif;font-weight:800">✉</div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <span class="logo-f">Syahmi Zufayri</span>
-    <span class="muted">© <span id="year"></span> · HTML · CSS · JS</span>
-  </footer>
+    <footer class="footer">
+      <span>&copy; <span id="year"></span> Ahmad Syahmi Zufayri</span>
+      <span class="muted">Built with HTML &bull; CSS &bull; JS</span>
+    </footer>
+  </main>
 
-</main>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside or press Esc to close</div>
+  </div>
 
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <button class="lightboxClose" id="lightboxClose" aria-label="Close">×</button>
-  <img id="lightboxImg" alt="Zoomed image">
-  <div class="lightboxHint">Click outside or press Esc to close</div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

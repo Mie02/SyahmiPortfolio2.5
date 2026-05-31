@@ -1,146 +1,121 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects — Syahmi Zufayri</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Ahmad Syahmi Zufayri</title>
+  <meta name="description" content="All projects by Ahmad Syahmi Zufayri — Unity games, OpenGL 3D, motion graphics, computer animation, and Blender work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<div id="cursorGlow" aria-hidden="true"></div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html">SZ</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="projects.html" class="active">Projects</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
   </div>
-</header>
+  <div id="cursorGlow" aria-hidden="true"></div>
 
-<main class="container">
-
-  <section class="section">
-    <div class="section-head reveal">
-      <div class="accent-line"></div>
-      <h2>All Projects</h2>
-      <p>Click any project to see details, screenshots, and videos.</p>
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Syahmi<span class="logo-dot">.</span></a>
+      <nav class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <div class="project-grid">
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
 
-      <a class="project-card reveal" href="projects/drag-and-drop-game.html">
-        <div class="project-thumb">
-          <img src="images/dd3.png" alt="Flashcard + Drag & Drop Game" loading="lazy" decoding="async">
+  <main class="container">
+    <section class="section" aria-labelledby="projectsTitle">
+      <div class="sectionHead">
+        <div>
+          <h1 class="page-title" id="projectsTitle">All <span class="grad">Projects</span></h1>
+          <p class="muted">Click a project to view details + screenshots.</p>
         </div>
-        <div class="project-body">
-          <h3>Flashcard + Drag & Drop Game</h3>
-          <p>Unity learning game with difficulty modes, timer, scoring & audio.</p>
-          <div class="tags">
-            <span class="tag">Unity</span>
-            <span class="tag">C#</span>
-            <span class="tag">UI/UX</span>
-            <span class="tag">Game Logic</span>
+      </div>
+
+      <div class="grid projects-grid">
+        <a class="project-card reveal" href="projects/drag-and-drop-game.html">
+          <div class="thumb"><img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop Game" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Flashcard + Drag &amp; Drop Game</h3>
+            <p>Unity learning game with difficulty modes, timer, scoring &amp; audio.</p>
+            <div class="tags"><span>Unity</span><span>C#</span><span>UI/UX</span><span>Game Logic</span></div>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="projects/opengl-cafeteria.html">
-        <div class="project-thumb">
-          <img src="images/cf5.png" alt="OpenGL 3D Cafeteria Module" loading="lazy" decoding="async">
-        </div>
-        <div class="project-body">
-          <h3>OpenGL 3D Cafeteria Module</h3>
-          <p>3D building using primitives, transformations & matrix stack (GLUT).</p>
-          <div class="tags">
-            <span class="tag">OpenGL</span>
-            <span class="tag">C++</span>
-            <span class="tag">3D</span>
-            <span class="tag">GLUT</span>
+        <a class="project-card reveal" href="projects/opengl-cafeteria.html" style="transition-delay:.05s">
+          <div class="thumb"><img class="zoomable" src="images/cf5.png" alt="OpenGL 3D Cafeteria Module" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>OpenGL 3D Cafeteria Module</h3>
+            <p>3D building using primitives, transformations &amp; matrix stack (GLUT).</p>
+            <div class="tags"><span>OpenGL</span><span>C++</span><span>3D</span><span>GLUT</span></div>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="projects/motion-graphics.html">
-        <div class="project-thumb">
-          <img src="images/mg3.png" alt="Motion Graphics Video" loading="lazy" decoding="async">
-        </div>
-        <div class="project-body">
-          <h3>Motion Graphics</h3>
-          <p>Kinetic typography + clean transitions + music sync.</p>
-          <div class="tags">
-            <span class="tag">After Effects</span>
-            <span class="tag">Typography</span>
-            <span class="tag">Motion</span>
+        <a class="project-card reveal" href="projects/motion-graphics.html" style="transition-delay:.1s">
+          <div class="thumb"><img class="zoomable" src="images/mg3.png" alt="Motion Graphics Video" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Motion Graphics</h3>
+            <p>Kinetic typography + clean transitions + music sync.</p>
+            <div class="tags"><span>Editing</span><span>Typography</span><span>Motion</span></div>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="projects/computer-animation.html">
-        <div class="project-thumb">
-          <img src="images/ca1.png" alt="Computer Animation Project" loading="lazy" decoding="async">
-        </div>
-        <div class="project-body">
-          <h3>Computer Animation</h3>
-          <p>Animation principles applied: timing, spacing, squash & stretch.</p>
-          <div class="tags">
-            <span class="tag">Animation</span>
-            <span class="tag">Keyframes</span>
-            <span class="tag">Principles</span>
+        <a class="project-card reveal" href="projects/computer-animation.html" style="transition-delay:.15s">
+          <div class="thumb"><img class="zoomable" src="images/ca1.png" alt="Computer Animation Project" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Computer Animation Project</h3>
+            <p>Animation principles: timing, spacing, squash &amp; stretch.</p>
+            <div class="tags"><span>Animation</span><span>Keyframes</span><span>Principles</span></div>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="projects/blender-workshop-2.html">
-        <div class="project-thumb">
-          <img src="images/ws5.png" alt="Blender Workshop 2" loading="lazy" decoding="async">
-        </div>
-        <div class="project-body">
-          <h3>Blender Workshop 2</h3>
-          <p>Modeling, materials, lighting & clean render workflow.</p>
-          <div class="tags">
-            <span class="tag">Blender</span>
-            <span class="tag">Modeling</span>
-            <span class="tag">Lighting</span>
-            <span class="tag">Render</span>
+        <a class="project-card reveal" href="projects/blender-workshop-2.html" style="transition-delay:.2s">
+          <div class="thumb"><img class="zoomable" src="images/ws5.png" alt="Blender Workshop 2" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Blender Workshop 2</h3>
+            <p>Modeling + materials + lighting + render workflow + camera.</p>
+            <div class="tags"><span>Blender</span><span>Cinematography</span><span>Modeling</span><span>Lighting</span></div>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="projects/bujang-lapok.html">
-        <div class="project-thumb">
-          <img src="images/bl1.jpg" alt="Bujang Lapok Recreate" loading="lazy" decoding="async">
-        </div>
-        <div class="project-body">
-          <h3>Bujang Lapok Recreate</h3>
-          <p>Scene/style study with camera angles & mood lighting.</p>
-          <div class="tags">
-            <span class="tag">Recreate</span>
-            <span class="tag">Cinematography</span>
-            <span class="tag">Lighting</span>
+        <a class="project-card reveal" href="projects/bujang-lapok.html" style="transition-delay:.25s">
+          <div class="thumb"><img class="zoomable" src="images/bl1.jpg" alt="Bujang Lapok Recreate" loading="lazy" decoding="async"></div>
+          <div class="project-body">
+            <h3>Bujang Lapok Recreate</h3>
+            <p>Scene/style study with camera angles &amp; mood lighting.</p>
+            <div class="tags"><span>Recreate</span><span>Cinematography</span><span>Lighting</span></div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <footer class="footer">
+      <span>&copy; <span id="year"></span> Ahmad Syahmi Zufayri</span>
+      <span class="muted">HTML &bull; CSS &bull; JS</span>
+    </footer>
+  </main>
 
-  <footer class="footer">
-    <span class="logo-f">Syahmi Zufayri</span>
-    <span class="muted">© <span id="year"></span> · HTML · CSS · JS</span>
-  </footer>
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
+    <img id="lightboxImg" alt="Zoomed image" />
+    <div class="lightboxHint">Click outside or press Esc to close</div>
+  </div>
 
-</main>
-
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <button class="lightboxClose" id="lightboxClose" aria-label="Close">×</button>
-  <img id="lightboxImg" alt="Zoomed image">
-  <div class="lightboxHint">Click outside or press Esc to close</div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
