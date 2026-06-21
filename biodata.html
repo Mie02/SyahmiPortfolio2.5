@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biodata — Ahmad Syahmi Zufayri</title>
+  <meta name="description"
+    content="Personal biodata of Ahmad Syahmi Zufayri — Unity developer, OpenGL 3D builder, and creative technologist from Malaysia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+
+<body class="apple-theme">
+
+  <!-- WebGL Background -->
+  <div id="webgl-container" aria-hidden="true"></div>
+
+  <!-- Custom Magnetic Cursor -->
+  <div id="cursorGlow" aria-hidden="true"></div>
+  <div id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">SYZ.</a>
+      <nav class="links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="biodata.html" class="active">Biodata</a>
+        <a href="skills.html">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="biodata.html">Biodata</a>
+    <a href="skills.html">Skills</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- HERO SECTION -->
+      <section class="hero section-padding">
+        <div class="container text-center">
+          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">Profile: SYZ_001</div>
+          <h1 class="hero-title reveal-up" style="
+            font-family: 'Orbitron', var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.9;
+            background: linear-gradient(180deg, var(--stardust) 0%, var(--plasma) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+          ">
+            Ahmad Syahmi<br>
+            <span style="font-weight:400;">Zufayri.</span>
+          </h1>
+          <p class="hero-subtitle reveal-up" style="
+            font-family: var(--font-mono);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+          ">
+            Vibe Coder &middot; Developer &middot; Designer
+          </p>
+          <div class="hero-cta reveal-up" style="margin-top: 2rem;">
+            <a href="assests/pdf/Syahmi_LogBook.pdf" target="_blank" class="btn btn-primary">↓ Access Logbook</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERSONAL INFO GRID -->
+      <section class="expertise section-padding">
+        <div class="container">
+          <h2 class="section-title reveal-up text-center" style="margin-bottom: 3rem;">Personal Data.</h2>
+          <div class="grid grid-3">
+            <div class="stat-card reveal-up" style="padding:2rem;">
+              <div class="stat-label" style="font-family:var(--font-mono); font-size:0.75rem;">LOCATION</div>
+              <p class="stat-desc" style="font-size:1.1rem; color:var(--plasma); font-family:'Orbitron',sans-serif;">Malaysia (GMT+8)</p>
+            </div>
+            <div class="stat-card reveal-up" style="padding:2rem; transition-delay: 0.1s">
+              <div class="stat-label" style="font-family:var(--font-mono); font-size:0.75rem;">STATUS</div>
+              <p class="stat-desc" style="font-size:1.1rem; color:var(--stellar); font-family:'Orbitron',sans-serif;">Active Student</p>
+            </div>
+            <div class="stat-card reveal-up" style="padding:2rem; transition-delay: 0.2s">
+              <div class="stat-label" style="font-family:var(--font-mono); font-size:0.75rem;">EMAIL</div>
+              <p class="stat-desc" style="font-size:0.9rem; color:var(--stardust); font-family:var(--font-mono);">
+                <a href="mailto:ahmadsyahmi723@gmail.com" style="color:inherit; text-decoration:none;">ahmadsyahmi723@gmail.com</a>
+              </p>
+            </div>
+            <div class="stat-card reveal-up" style="padding:2rem;">
+              <div class="stat-label" style="font-family:var(--font-mono); font-size:0.75rem;">GITHUB</div>
+              <p class="stat-desc" style="font-size:1.1rem; color:var(--supernova); font-family:'Orbitron',sans-serif;">
+                <a href="https://github.com/Mie02" target="_blank" style="color:inherit; text-decoration:none;">Mie02</a>
+              </p>
+            </div>
+            <div class="stat-card reveal-up" style="padding:2rem; transition-delay: 0.1s">
+              <div class="stat-label" style="font-family:var(--font-mono); font-size:0.75rem;">LANGUAGES</div>
+              <p class="stat-desc" style="font-size:1.1rem; color:var(--stardust); font-family:var(--font-mono);">Malay, English</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT ME -->
+      <section class="section-padding">
+        <div class="container">
+          <div style="display: flex; flex-direction: row; gap: 4rem; align-items: center; max-width: 1000px; margin: 0 auto; flex-wrap: wrap;">
+            
+            <!-- Profile Picture Placeholder -->
+            <div class="reveal-up" style="flex: 1; min-width: 300px; display: flex; justify-content: center;">
+              <div style="
+                width: 100%; 
+                max-width: 320px; 
+                aspect-ratio: 1/1; 
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                background: var(--glass-bg); 
+                border: 2px solid var(--plasma); 
+                position: relative;
+              ">
+                <img src="images/me1.jpg" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover; opacity:0.8; filter: grayscale(20%) contrast(1.2);">
+                <div style="position:absolute; inset:0; box-shadow: inset 0 0 40px rgba(0,198,255,0.4); pointer-events:none;"></div>
+              </div>
+            </div>
+
+            <!-- Text Description -->
+            <div class="reveal-up" style="flex: 1.5; min-width: 300px; text-align: left;">
+              <h2 class="section-title" style="margin-bottom: 1.5rem; text-align: left;">About Me.</h2>
+              <p style="color: var(--stardust); font-family: var(--font-base); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 300;">
+                I'm a computer science student from Malaysia with a strong focus on interactive media and software development. My technical journey involves exploring the intersection of code and design—from building raw 3D graphics in OpenGL and developing games in Unity, to motion design with After Effects.
+              </p>
+              <p style="color: var(--stardust); font-family: var(--font-base); font-size: 1.1rem; line-height: 1.8; font-weight: 300;">
+                I enjoy the process of turning complex ideas into functional, visually engaging digital experiences. Whether I'm working with database systems or animating graphics to a beat, I approach every project with curiosity, dedication, and a continuous drive to learn.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION (Flight Log) -->
+      <section class="section-padding section-dark">
+        <div class="container">
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4rem;">
+            <span class="eyebrow reveal-up">DATABASE ENTRY</span>
+            <h2 class="section-title reveal-up" style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin: 0;">Flight<br>Log.</h2>
+          </div>
+
+          <style>
+            .education-row {
+              display: grid;
+              grid-template-columns: 1fr 2fr 4fr;
+              gap: 2rem;
+              padding: 3rem 0;
+              border-bottom: 1px solid var(--glass-border);
+              align-items: start;
+            }
+
+            .education-row:last-child { border-bottom: none; }
+            .edu-logo { display: flex; justify-content: center; align-items: center; }
+            .edu-logo img {
+              width: 100px;
+              height: 100px;
+              object-fit: contain;
+              filter: drop-shadow(0 0 10px rgba(0,198,255,0.3));
+            }
+            .edu-meta {
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              padding-right: 2rem;
+              border-right: 1px solid var(--glass-border);
+              height: 100%;
+            }
+            .edu-date {
+              font-family: var(--font-mono);
+              font-weight: 700;
+              font-size: 0.9rem;
+              color: var(--plasma);
+            }
+            .edu-inst {
+              font-family: 'Space Grotesk', sans-serif;
+              font-size: 1.1rem;
+              text-transform: uppercase;
+              font-weight: 600;
+              letter-spacing: 1px;
+              color: var(--stardust);
+              line-height: 1.4;
+            }
+            .edu-details { padding-left: 1rem; }
+            .edu-details h4 {
+              font-family: 'Space Grotesk', sans-serif;
+              font-size: 1.25rem;
+              margin-bottom: 1rem;
+              font-weight: 600;
+              color: var(--stardust);
+            }
+            .edu-details ul {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+              color: var(--text-muted);
+              font-family: var(--font-mono);
+              font-size: 0.85rem;
+              line-height: 1.6;
+            }
+            .edu-details ul li {
+              margin-bottom: 0.5rem;
+              padding-left: 1.5rem;
+              position: relative;
+            }
+            .edu-details ul li::before {
+              content: '>';
+              position: absolute;
+              left: 0;
+              color: var(--plasma);
+              font-weight: bold;
+            }
+
+            @media (max-width: 900px) {
+              .education-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+              }
+
+              .edu-meta {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-right: 0;
+                padding-bottom: 1.5rem;
+              }
+
+              .edu-details {
+                padding-left: 0;
+                text-align: left;
+              }
+            }
+          </style>
+
+          <div class="education-list">
+
+            <!-- Row 1: SPM -->
+            <div class="education-row reveal-up">
+              <div class="edu-logo">
+                <img src="images/kiblah.png" alt="SMK Ayer Keroh Logo">
+              </div>
+              <div class="edu-meta">
+                <div class="edu-date">2015 - 2019</div>
+                <div class="edu-inst">SEKOLAH KIBLAH SEPANG
+                </div>
+              </div>
+              <div class="edu-details">
+                <h4>Sijil Pelajaran Malaysia (SPM)</h4>
+                <ul>
+                  <li>Result: Rahsia :)</li>
+                  <li>Secretary For PBSM</li>
+                  <li>Secretary For Badminton Club</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Row 2: Matrikulasi -->
+            <div class="education-row reveal-up">
+              <div class="edu-logo">
+                <img src="images/psmza.png" alt="Kolej Matrikulasi Melaka Logo">
+              </div>
+              <div class="edu-meta">
+                <div class="edu-date">2020 - 2023</div>
+                <div class="edu-inst">POLITEKNIK SULTAN MIZAN ZAINAL ABIDIN TERENGGANU</div>
+              </div>
+              <div class="edu-details">
+                <h4>Diploma In Computer Science (Digital Technology) </h4>
+                <ul>
+                  <li>CGPA: 3.40</li>
+                  <li>MUET: Band 4</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Row 3: UTeM -->
+            <div class="education-row reveal-up">
+              <div class="edu-logo">
+                <img src="images/utem.png" alt="UTeM Logo">
+              </div>
+              <div class="edu-meta">
+                <div class="edu-date">2024 - Present</div>
+                <div class="edu-inst">UNIVERSITI TEKNIKAL MALAYSIA MELAKA</div>
+              </div>
+              <div class="edu-details">
+                <h4>Bachelor of Computer Science (Interactive Media)</h4>
+                <ul>
+                  <li>Currently specializing in media related stuff and overall computer science related.</li>
+                  <li>Developing skills in Programming and Media.</li>
+                  <li>Current Semester: Year 3 (1st semester)</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container text-center">
+          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+            &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
+          </p>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

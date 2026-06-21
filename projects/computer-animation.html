@@ -3,143 +3,113 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Computer Animation — Syahmi</title>
-  <meta name="description" content="Computer animation project applying 12 principles of animation including timing, spacing, squash and stretch." />
+  <title>Computer Animation — Ahmad Syahmi Zufayri</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 </head>
-<body>
-  <div class="mesh-bg" aria-hidden="true">
-    <div class="mesh-blob blob-1"></div>
-    <div class="mesh-blob blob-2"></div>
-    <div class="mesh-blob blob-3"></div>
-  </div>
+<body class="apple-theme">
+  <div id="webgl-container" aria-hidden="true"></div>
   <div id="cursorGlow" aria-hidden="true"></div>
+  <div id="cursorDot" aria-hidden="true"></div>
 
   <header class="nav" id="navbar">
     <div class="nav-inner">
-      <a class="logo" href="../index.html">Syahmi<span class="logo-dot">.</span></a>
-      <nav class="links" aria-label="Main navigation">
+      <a class="logo" href="../index.html">SYZ.</a>
+      <nav class="links">
         <a href="../index.html">Home</a>
-        <a href="../projects.html">Projects</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../biodata.html">Biodata</a>
+        <a href="../skills.html">Skills</a>
         <a href="../index.html#contact">Contact</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </header>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="../index.html">Home</a>
-    <a href="../projects.html">Projects</a>
-    <a href="../index.html#contact">Contact</a>
-  </div>
-
-  <main class="container">
-    <a class="back" href="../projects.html">&larr; Back to Projects</a>
-
-    <section class="card reveal" style="padding:26px;margin-top:16px" aria-labelledby="projectTitle">
-      <h1 class="page-title" id="projectTitle">Computer <span class="grad">Animation</span> Project</h1>
-      <p class="muted">
-        An animation exercise applying core principles such as timing, spacing, squash &amp; stretch, anticipation, and smooth keyframe control.
-      </p>
-      <div class="tags" style="margin-top:12px">
-        <span>Animation</span><span>Keyframes</span><span>Timing</span><span>Spacing</span>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:20px" class="anim-intro">
-        <div style="background:var(--grad-subtle);border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:20px">
-          <h2 style="margin-bottom:14px">Principles <span class="grad">Applied</span></h2>
-          <div style="display:grid;gap:10px">
-            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
-              <b>Timing</b>
-              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Controlled speed to show weight and intention.</p>
-            </div>
-            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
-              <b>Spacing</b>
-              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Smoother arcs using better in-between spacing.</p>
-            </div>
-            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
-              <b>Squash &amp; Stretch</b>
-              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Added elasticity while keeping volume believable.</p>
-            </div>
-            <div style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.2)">
-              <b>Anticipation</b>
-              <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem;line-height:1.55">Small prep motion before the main action.</p>
-            </div>
+  
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+      <section class="hero section-padding">
+        <div class="container text-center">
+          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">CASE STUDY</div>
+          <h1 class="hero-title reveal-up" style="
+            font-family: 'Orbitron', var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            background: linear-gradient(180deg, var(--stardust) 0%, var(--plasma) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+          ">Computer<br>Animation.</h1>
+          <p class="hero-subtitle reveal-up" style="font-family:var(--font-mono); font-size:0.9rem; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase;">Blender 3D Rigid Body</p>
+          <div class="hero-cta reveal-up" style="margin-top: 2rem;">
+            <a href="../projects.html" class="btn btn-outline">&larr; Back to Projects</a>
           </div>
         </div>
-        <div class="card" style="overflow:hidden">
-          <div class="thumb" style="height:280px">
-            <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Computer Animation cover frame" loading="lazy" decoding="async">
-          </div>
-          <div style="padding:14px">
-            <div class="tags">
-              <span>Curves</span><span>Arcs</span><span>Polish</span>
+      </section>
+
+      <section class="expertise section-padding" style="padding-top: 0;">
+        <div class="container" style="max-width: 900px;">
+          <div class="reveal-up" style="
+            background:var(--glass-bg);
+            padding:3rem;
+            border-radius:12px;
+            border:1px solid var(--glass-border);
+            border-top:2px solid var(--plasma);
+            margin-bottom:4rem;
+          ">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Overview</h2>
+            <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
+              3D physics simulations utilizing rigid body dynamics, cloth simulations, and keyframe animations rendered in Blender.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <span style="
+                background:rgba(0,198,255,0.08);
+                border:1px solid rgba(0,198,255,0.25);
+                border-radius:4px;
+                padding:0.3rem 0.8rem;
+                font-family:var(--font-mono);
+                font-size:0.72rem;
+                letter-spacing:0.08em;
+                color:var(--plasma);
+              ">Blender</span>
+              <span style="
+                background:rgba(0,198,255,0.08);
+                border:1px solid rgba(0,198,255,0.25);
+                border-radius:4px;
+                padding:0.3rem 0.8rem;
+                font-family:var(--font-mono);
+                font-size:0.72rem;
+                letter-spacing:0.08em;
+                color:var(--plasma);
+              ">Physics</span>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section reveal" aria-labelledby="videoTitle">
-      <div class="sectionHead">
-        <div>
-          <h2 id="videoTitle">Video <span class="grad">Showcase</span></h2>
-          <p class="muted">Watch animation highlights.</p>
+          <h2 class="section-title reveal-up text-center" style="margin-bottom: 2rem;">Gallery</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+            <img src="../images/ca1.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+            <img src="../images/ca2.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+            <img src="../images/ca3.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+            <img src="../images/ca4.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+            <img src="../images/ca5.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+            <img src="../images/ca6.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+          </div>
         </div>
-      </div>
-      <div class="videoGrid">
-        <div class="videoCard">
-          <video controls preload="metadata">
-            <source src="../videos/motion1.mp4" type="video/mp4">
-          </video>
-          <div class="videoCaption">Kinetic Typography Intro</div>
-        </div>
-        <div class="videoCard">
-          <video controls preload="metadata">
-            <source src="../videos/motion2.mp4" type="video/mp4">
-          </video>
-          <div class="videoCaption">Transition Montage</div>
-        </div>
-        <div class="videoCard">
-          <video controls preload="metadata">
-            <source src="../videos/motion3.mp4" type="video/mp4">
-          </video>
-          <div class="videoCaption">Beat Sync Edit</div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section reveal" aria-labelledby="framesTitle">
-      <h2 id="framesTitle">Animation <span class="grad">Frames</span></h2>
-      <div class="card" style="margin-top:16px">
-        <div class="galleryGrid">
-          <img class="zoomable" data-modal="img" src="../images/ca1.png" alt="Animation frame 1" loading="lazy" decoding="async" style="grid-column:span 4">
-          <img class="zoomable" data-modal="img" src="../images/ca2.png" alt="Animation frame 2" loading="lazy" decoding="async" style="grid-column:span 4">
-          <img class="zoomable" data-modal="img" src="../images/ca3.png" alt="Animation frame 3" loading="lazy" decoding="async" style="grid-column:span 4">
-          <img class="zoomable" data-modal="img" src="../images/ca4.png" alt="Animation frame 4" loading="lazy" decoding="async" style="grid-column:span 4">
-          <img class="zoomable" data-modal="img" src="../images/ca5.png" alt="Animation frame 5" loading="lazy" decoding="async" style="grid-column:span 4">
-          <img class="zoomable" data-modal="img" src="../images/ca6.png" alt="Animation frame 6" loading="lazy" decoding="async" style="grid-column:span 4">
+      <footer class="footer">
+        <div class="container text-center">
+          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+            &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
+          </p>
         </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <span>&copy; <span id="year"></span> Ahmad Syahmi Zufayri</span>
-      <span class="muted">Animation</span>
-    </footer>
+      </footer>
+    </div>
   </main>
-
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
-    <img id="lightboxImg" alt="Zoomed image" />
-    <div class="lightboxHint">Click outside or press Esc to close</div>
-  </div>
-
   <script src="../script.js"></script>
 </body>
 </html>

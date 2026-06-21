@@ -4,117 +4,207 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects — Ahmad Syahmi Zufayri</title>
-  <meta name="description" content="All projects by Ahmad Syahmi Zufayri — Unity games, OpenGL 3D, motion graphics, computer animation, and Blender work." />
+  <meta name="description" content="View the portfolio projects of Ahmad Syahmi Zufayri." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 </head>
-<body>
-  <div class="mesh-bg" aria-hidden="true">
-    <div class="mesh-blob blob-1"></div>
-    <div class="mesh-blob blob-2"></div>
-    <div class="mesh-blob blob-3"></div>
-  </div>
+<body class="apple-theme">
+
+  <div id="webgl-container" aria-hidden="true"></div>
   <div id="cursorGlow" aria-hidden="true"></div>
+  <div id="cursorDot" aria-hidden="true"></div>
 
   <header class="nav" id="navbar">
     <div class="nav-inner">
-      <a class="logo" href="index.html">Syahmi<span class="logo-dot">.</span></a>
-      <nav class="links" aria-label="Main navigation">
+      <a class="logo" href="index.html">SYZ.</a>
+      <nav class="links">
         <a href="index.html">Home</a>
-        <a class="active" href="projects.html">Projects</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="skills.html">Skills</a>
         <a href="index.html#contact">Contact</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
     </div>
   </header>
-
+  
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="index.html">Home</a>
     <a href="projects.html">Projects</a>
+    <a href="biodata.html">Biodata</a>
+    <a href="skills.html">Skills</a>
     <a href="index.html#contact">Contact</a>
   </div>
 
-  <main class="container">
-    <section class="section" aria-labelledby="projectsTitle">
-      <div class="sectionHead">
-        <div>
-          <h1 class="page-title" id="projectsTitle">All <span class="grad">Projects</span></h1>
-          <p class="muted">Click a project to view details + screenshots.</p>
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+      
+      <!-- HERO SECTION -->
+      <section class="hero section-padding">
+        <div class="container text-center">
+          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">SELECTED WORKS</div>
+          <h1 class="hero-title reveal-up" style="
+            font-family: 'Orbitron', var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            background: linear-gradient(135deg, var(--stardust) 30%, var(--stellar) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+          ">Portfolio<br>Showcase.</h1>
+          <p class="hero-subtitle reveal-up" style="
+            font-family: var(--font-mono); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.2em; 
+            color: var(--text-muted);
+            text-transform: uppercase;
+          ">
+            INTERACTIVE GAMES &middot; 3D RENDERS &middot; MOTION GRAPHICS
+          </p>
         </div>
-      </div>
+      </section>
 
-      <div class="grid projects-grid">
-        <a class="project-card reveal" href="projects/drag-and-drop-game.html">
-          <div class="thumb"><img class="zoomable" src="images/dd3.png" alt="Flashcard + Drag & Drop Game" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>Flashcard + Drag &amp; Drop Game</h3>
-            <p>Unity learning game with difficulty modes, timer, scoring &amp; audio.</p>
-            <div class="tags"><span>Unity</span><span>C#</span><span>UI/UX</span><span>Game Logic</span></div>
+      <!-- PROJECTS GRID -->
+      <section class="expertise section-padding" style="padding-top: 0;">
+        <div class="container">
+          <div class="grid grid-3">
+            
+            <a href="projects/drag-and-drop-game.html" class="project-card reveal-up" style="width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/dd3.png" alt="Drag & Drop Game" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>Drag &amp; Drop Game</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Unity &middot; C# &middot; UI/UX</p>
+              </div>
+            </a>
+
+            <a href="projects/opengl-cafeteria.html" class="project-card reveal-up" style="transition-delay: 0.1s; width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/cf5.png" alt="OpenGL Cafeteria" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>OpenGL 3D Cafeteria</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">C++ &middot; OpenGL &middot; WebGL</p>
+              </div>
+            </a>
+
+            <a href="projects/motion-graphics.html" class="project-card reveal-up" style="transition-delay: 0.2s; width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/mg4.png" alt="Motion Graphics" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>Motion Graphics</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">After Effects &middot; Typography</p>
+              </div>
+            </a>
+
+            <a href="projects/computer-animation.html" class="project-card reveal-up" style="width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/ca4.png" alt="Computer Animation" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>Computer Animation</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Blender &middot; Rigid Body</p>
+              </div>
+            </a>
+
+            <a href="projects/blender-workshop-2.html" class="project-card reveal-up" style="transition-delay: 0.1s; width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/ws1.png" alt="Blender Workshop" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>Blender Rendering Workshop</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Blender &middot; Lighting &middot; Render</p>
+              </div>
+            </a>
+
+            <a href="projects/bujang-lapok.html" class="project-card reveal-up" style="transition-delay: 0.2s; width: 100%; position:relative;">
+              <div style="
+                position:absolute; top:1rem; right:1rem; z-index:2;
+                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
+                padding:0.25rem 0.6rem;
+                background:rgba(0,198,255,0.1);
+                border:1px solid var(--plasma);
+                border-radius:4px;
+                color:var(--plasma);
+              ">COMPLETED</div>
+              <div class="project-img-wrapper">
+                <img src="images/bj4.png" alt="Bujang Lapok Recreate" loading="lazy">
+              </div>
+              <div class="project-info">
+                <h3>Bujang Lapok Recreate</h3>
+                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Premiere Pro &middot; Color Grade</p>
+              </div>
+            </a>
+
           </div>
-        </a>
+        </div>
+      </section>
 
-        <a class="project-card reveal" href="projects/opengl-cafeteria.html" style="transition-delay:.05s">
-          <div class="thumb"><img class="zoomable" src="images/cf5.png" alt="OpenGL 3D Cafeteria Module" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>OpenGL 3D Cafeteria Module</h3>
-            <p>3D building using primitives, transformations &amp; matrix stack (GLUT).</p>
-            <div class="tags"><span>OpenGL</span><span>C++</span><span>3D</span><span>GLUT</span></div>
-          </div>
-        </a>
+      <footer class="footer">
+        <div class="container text-center">
+          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+            &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
+          </p>
+        </div>
+      </footer>
 
-        <a class="project-card reveal" href="projects/motion-graphics.html" style="transition-delay:.1s">
-          <div class="thumb"><img class="zoomable" src="images/mg3.png" alt="Motion Graphics Video" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>Motion Graphics</h3>
-            <p>Kinetic typography + clean transitions + music sync.</p>
-            <div class="tags"><span>Editing</span><span>Typography</span><span>Motion</span></div>
-          </div>
-        </a>
-
-        <a class="project-card reveal" href="projects/computer-animation.html" style="transition-delay:.15s">
-          <div class="thumb"><img class="zoomable" src="images/ca1.png" alt="Computer Animation Project" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>Computer Animation Project</h3>
-            <p>Animation principles: timing, spacing, squash &amp; stretch.</p>
-            <div class="tags"><span>Animation</span><span>Keyframes</span><span>Principles</span></div>
-          </div>
-        </a>
-
-        <a class="project-card reveal" href="projects/blender-workshop-2.html" style="transition-delay:.2s">
-          <div class="thumb"><img class="zoomable" src="images/ws5.png" alt="Blender Workshop 2" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>Blender Workshop 2</h3>
-            <p>Modeling + materials + lighting + render workflow + camera.</p>
-            <div class="tags"><span>Blender</span><span>Cinematography</span><span>Modeling</span><span>Lighting</span></div>
-          </div>
-        </a>
-
-        <a class="project-card reveal" href="projects/bujang-lapok.html" style="transition-delay:.25s">
-          <div class="thumb"><img class="zoomable" src="images/bl1.jpg" alt="Bujang Lapok Recreate" loading="lazy" decoding="async"></div>
-          <div class="project-body">
-            <h3>Bujang Lapok Recreate</h3>
-            <p>Scene/style study with camera angles &amp; mood lighting.</p>
-            <div class="tags"><span>Recreate</span><span>Cinematography</span><span>Lighting</span></div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <span>&copy; <span id="year"></span> Ahmad Syahmi Zufayri</span>
-      <span class="muted">HTML &bull; CSS &bull; JS</span>
-    </footer>
+    </div>
   </main>
-
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-    <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
-    <img id="lightboxImg" alt="Zoomed image" />
-    <div class="lightboxHint">Click outside or press Esc to close</div>
-  </div>
 
   <script src="script.js"></script>
 </body>

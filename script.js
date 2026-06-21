@@ -1,280 +1,389 @@
 // =============================================
-// Helpers
+// APPLE AESTHETIC 3D PORTFOLIO — apple-script.js
 // =============================================
-const $ = (s, ctx = document) => ctx.querySelector(s);
-const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
 
-// =============================================
-// DOM Ready
-// =============================================
-document.addEventListener('DOMContentLoaded', () => {
-  setYear();
-  initNav();
-  initHamburger();
-  initTyping();
-  initCarousel();
-  initReveal();
-  initCursorGlow();
-  initLightbox();
-  initImageFallback();
+gsap.registerPlugin(ScrollTrigger);
+
+// ─── 1. LENIS SMOOTH SCROLL ───
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
 });
 
-// =============================================
-// Footer year
-// =============================================
-function setYear() {
-  const el = $('#year');
-  if (el) el.textContent = new Date().getFullYear();
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Connect Lenis to ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time)=>{
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0, 0);
+
+// ─── 2. THREE.JS INTERACTIVE TERRAIN ───
+function initThreeJS() {
+  const container = document.getElementById('webgl-container');
+  if (!container) return;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000000, 0.04);
+
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 5, 20); // Look down slightly at the terrain
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+  scene.add(ambientLight);
+
+  const dirLight = new THREE.DirectionalLight(0x2997ff, 3);
+  dirLight.position.set(10, 20, 10);
+  scene.add(dirLight);
+
+  const pointLight = new THREE.PointLight(0xff0055, 3, 100);
+  pointLight.position.set(-10, 10, -10);
+  scene.add(pointLight);
+
+  // Wavy Terrain Geometry
+  const geometry = new THREE.PlaneGeometry(150, 150, 80, 80);
+  
+  // Solid base
+  const solidMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x050505,
+    metalness: 0.9,
+    roughness: 0.4,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.2
+  });
+  const planeSolid = new THREE.Mesh(geometry, solidMaterial);
+  
+  // Wireframe glowing grid on top
+  const wireMaterial = new THREE.MeshBasicMaterial({
+    color: 0x0a4488,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.25
+  });
+  const planeWire = new THREE.Mesh(geometry, wireMaterial);
+  planeSolid.add(planeWire);
+
+  planeSolid.rotation.x = -Math.PI / 2;
+  planeSolid.position.y = -8;
+  scene.add(planeSolid);
+
+  // Buffer references
+  const positionAttribute = geometry.attributes.position;
+
+  // Mouse Interaction
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  let targetPoint = new THREE.Vector3(0, -1000, 0); // Far away initially
+  let currentPoint = new THREE.Vector3(0, -1000, 0);
+
+  document.addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsedTime = clock.getElapsedTime();
+
+    // Raycast to find mouse position on plane
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(planeSolid);
+    if (intersects.length > 0) {
+      targetPoint.copy(intersects[0].point);
+    }
+    // Lerp current point to target point for smooth ripples
+    currentPoint.lerp(targetPoint, 0.05);
+
+    // Update vertices for wave and ripple effect
+    for (let i = 0; i < positionAttribute.count; i++) {
+      const vx = positionAttribute.getX(i);
+      const vy = positionAttribute.getY(i);
+      
+      // Basic wave math
+      const wave1 = Math.sin(vx * 0.1 + elapsedTime) * 1.5;
+      const wave2 = Math.cos(vy * 0.1 + elapsedTime * 0.8) * 1.5;
+      
+      // Interactive Ripple math
+      const worldX = vx;
+      const worldZ = -vy;
+      const dist = Math.sqrt(Math.pow(worldX - currentPoint.x, 2) + Math.pow(worldZ - currentPoint.z, 2));
+      
+      let ripple = 0;
+      if (dist < 20) {
+        // Create a ripple burst outward from the mouse
+        ripple = Math.cos(dist * 1.2 - elapsedTime * 6) * (20 - dist) * 0.2;
+      }
+
+      positionAttribute.setZ(i, wave1 + wave2 + ripple);
+    }
+    
+    positionAttribute.needsUpdate = true;
+    geometry.computeVertexNormals(); // Update lighting based on new waves
+
+    // Gentle camera pan based on mouse
+    camera.position.x += (mouse.x * 3 - camera.position.x) * 0.02;
+    camera.lookAt(0, -3, 0);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Scroll link to move camera through the terrain
+  ScrollTrigger.create({
+    trigger: document.body,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 1,
+    onUpdate: (self) => {
+      camera.position.z = 20 - (self.progress * 35);
+      camera.position.y = 5 - (self.progress * 6);
+      camera.lookAt(0, -3, 0);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 }
 
-// =============================================
-// Sticky nav
-// =============================================
-function initNav() {
-  const nav = $('#navbar');
-  if (!nav) return;
+// ─── 3. GSAP ANIMATIONS ───
+function initAnimations() {
+  // Reveal Up (Title, Subtitles)
+  const reveals = document.querySelectorAll('.reveal-up');
+  reveals.forEach(el => {
+    gsap.fromTo(el, 
+      { y: 50, opacity: 0, autoAlpha: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        autoAlpha: 1, 
+        duration: 1, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  });
+
+  // Horizontal Scroll for Projects
+  const horizontalTrack = document.getElementById('horizontalTrack');
+  if (horizontalTrack) {
+    const wrap = document.querySelector('.horizontal-scroll-container');
+    const scrollWidth = horizontalTrack.scrollWidth - window.innerWidth + window.innerWidth * 0.1;
+
+    gsap.to(horizontalTrack, {
+      x: () => -scrollWidth + "px",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".projects-pin-section",
+        start: "top top",
+        end: () => "+=" + scrollWidth,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1
+      }
+    });
+  }
+
+  // Sticky Navbar
+  const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-}
-
-// =============================================
-// Hamburger / Mobile Menu
-// =============================================
-function initHamburger() {
-  const btn  = $('#hamburger');
-  const menu = $('#mobileMenu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', () => {
-    const open = btn.classList.toggle('open');
-    menu.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', open);
-    menu.setAttribute('aria-hidden', !open);
-  });
-
-  // Close on any mobile link click
-  $$('a', menu).forEach(a => {
-    a.addEventListener('click', () => {
-      btn.classList.remove('open');
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', false);
-      menu.setAttribute('aria-hidden', true);
-    });
-  });
-}
-
-// =============================================
-// Typing / Typewriter effect
-// =============================================
-function initTyping() {
-  const el = $('#typeText');
-  if (!el) return;
-
-  const roles = [
-    'Unity Developer',
-    'Motion Graphics Editor',
-    'OpenGL 3D Builder',
-    'Computer Animator',
-    'Blender Workshop Creator',
-  ];
-
-  let i = 0, j = 0, deleting = false;
-
-  function tick() {
-    const word = roles[i];
-    el.textContent = word.slice(0, j);
-
-    if (!deleting) {
-      j++;
-      if (j > word.length) {
-        deleting = true;
-        setTimeout(tick, 1100);
-        return;
-      }
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
     } else {
-      j--;
-      if (j === 0) {
-        deleting = false;
-        i = (i + 1) % roles.length;
-      }
+      nav.classList.remove('scrolled');
     }
-    setTimeout(tick, deleting ? 38 : 60);
-  }
-  tick();
-}
-
-// =============================================
-// Carousel
-// =============================================
-function initCarousel() {
-  const carousel = $('#carousel');
-  const dotsWrap = $('#dots');
-  if (!carousel || !dotsWrap) return;
-
-  const slides = $$('.slide', carousel);
-  if (!slides.length) return;
-
-  dotsWrap.innerHTML = '';
-  slides.forEach((_, idx) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'dot' + (idx === 0 ? ' active' : '');
-    b.setAttribute('role', 'tab');
-    b.setAttribute('aria-label', `Slide ${idx + 1}`);
-    b.addEventListener('click', () => go(idx));
-    dotsWrap.appendChild(b);
   });
 
-  const dots = $$('.dot', dotsWrap);
-  let current = 0;
-  let timer = setInterval(next, 4000);
-
-  function go(idx) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = idx;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    reset();
-  }
-
-  function next() { go((current + 1) % slides.length); }
-  function prev() { go((current - 1 + slides.length) % slides.length); }
-  function reset() { clearInterval(timer); timer = setInterval(next, 4000); }
-
-  carousel.addEventListener('mouseenter', () => clearInterval(timer));
-  carousel.addEventListener('mouseleave', reset);
-
-  const btnNext = $('#carouselNext');
-  const btnPrev = $('#carouselPrev');
-  if (btnNext) { btnNext.addEventListener('click', next); btnNext.addEventListener('click', reset); }
-  if (btnPrev) { btnPrev.addEventListener('click', prev); btnPrev.addEventListener('click', reset); }
-
-  // Touch swipe
-  let touchStartX = 0;
-  carousel.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
-  carousel.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); reset(); }
+  // Hamburger Menu
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.contains('open');
+    if(isOpen) {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
   });
 }
 
-// =============================================
-// Scroll Reveal
-// =============================================
-function initReveal() {
-  const elements = $$('.reveal');
-  if (!elements.length) return;
+// ─── 4. CUSTOM MAGNETIC CURSOR ───
+function initCursor() {
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorGlow = document.getElementById('cursorGlow');
+  if (!cursorDot || !cursorGlow) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    elements.forEach(el => el.classList.add('active'));
-    return;
-  }
-
-  if (!('IntersectionObserver' in window)) {
-    elements.forEach(el => el.classList.add('active'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('active');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  elements.forEach(el => io.observe(el));
-}
-
-// =============================================
-// Cursor Glow
-// =============================================
-function initCursorGlow() {
-  const glow = $('#cursorGlow');
-  if (!glow) return;
-
-  // Disable on touch devices
   if (window.matchMedia('(pointer: coarse)').matches) {
-    glow.style.display = 'none';
+    cursorDot.style.display = 'none';
+    cursorGlow.style.display = 'none';
     return;
   }
 
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top  = e.clientY + 'px';
-  }, { passive: true });
+  let mouse = { x: window.innerWidth/2, y: window.innerHeight/2 };
+  let pos = { x: window.innerWidth/2, y: window.innerHeight/2 };
+  const speed = 0.15;
+
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    cursorDot.style.left = mouse.x + 'px';
+    cursorDot.style.top = mouse.y + 'px';
+  });
+
+  const xSet = gsap.quickSetter(cursorGlow, "x", "px");
+  const ySet = gsap.quickSetter(cursorGlow, "y", "px");
+
+  gsap.ticker.add(() => {
+    pos.x += (mouse.x - pos.x) * speed;
+    pos.y += (mouse.y - pos.y) * speed;
+    xSet(pos.x - window.innerWidth/2);
+    ySet(pos.y - window.innerHeight/2);
+    // Since cursorGlow is translated by -50%, -50% in CSS, we just need to set left/top to mouse pos
+    // Wait, the quickSetter sets transform X/Y. If CSS has left:0, top:0, transform: translate(-50%,-50%), 
+    // we should just set left and top, or update the quickSetter.
+  });
+
+  // Fix: quickSetter is better for transform, but let's just use vanilla JS for glow left/top
+  function updateGlow() {
+    cursorGlow.style.left = pos.x + 'px';
+    cursorGlow.style.top = pos.y + 'px';
+    requestAnimationFrame(updateGlow);
+  }
+  updateGlow();
+
+  const interactives = document.querySelectorAll('a, button');
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+  });
 }
 
-// =============================================
-// Lightbox (image zoom)
-// =============================================
+// ─── 5. IMAGE LIGHTBOX (ZOOM) ───
 function initLightbox() {
-  let lb    = $('#lightbox');
-  let lbImg = $('#lightboxImg');
-  let lbClose = $('#lightboxClose');
-
-  // Auto-inject if markup not present
-  if (!lb) {
-    const div = document.createElement('div');
-    div.innerHTML = `
-      <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-        <button class="lightboxClose" id="lightboxClose" aria-label="Close (Esc)">&times;</button>
-        <img id="lightboxImg" alt="Zoomed image" />
-        <div class="lightboxHint">Click outside or press Esc to close</div>
-      </div>`;
-    document.body.appendChild(div.firstElementChild);
-    lb      = $('#lightbox');
-    lbImg   = $('#lightboxImg');
-    lbClose = $('#lightboxClose');
+  // Create lightbox HTML if it doesn't exist
+  let lightbox = document.getElementById('lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.id = 'lightbox';
+    lightbox.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="Zoomed image">
+    `;
+    document.body.appendChild(lightbox);
   }
 
-  function open(src, alt) {
-    if (!lb || !lbImg) return;
-    lbImg.src = src;
-    lbImg.alt = alt || 'Zoomed image';
-    lb.style.display = 'flex';
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('noScroll');
-    lbClose && lbClose.focus();
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    setTimeout(() => {
+      lightboxImg.src = '';
+    }, 300);
   }
 
-  function close() {
-    if (!lb) return;
-    lb.style.display = 'none';
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('noScroll');
-    if (lbImg) lbImg.src = '';
-  }
-
-  document.addEventListener('click', e => {
-    const t = e.target;
-    if (!(t instanceof HTMLElement)) return;
-    if (t.classList.contains('zoomable') || t.getAttribute('data-modal') === 'img') {
-      const src = (t instanceof HTMLImageElement) ? (t.dataset.zoom || t.currentSrc || t.src) : '';
-      if (src) open(src, t.alt);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target !== lightboxImg) {
+      closeLightbox();
     }
   });
 
-  lb?.addEventListener('click', e => { if (e.target === lb) close(); });
-  lbImg?.addEventListener('click', e => e.stopPropagation());
-  lbClose?.addEventListener('click', e => { e.preventDefault(); close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+
+  // Select all images on the page that should be zoomable
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    // Exclude images inside project cards (which are links) or other non-zoomable contexts
+    if (!img.closest('a') && !img.closest('.project-img-wrapper')) {
+      img.classList.add('zoomable');
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+      // Add hover effect for custom cursor if active
+      img.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+      img.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+    }
+  });
 }
 
-// =============================================
-// Image fallback
-// =============================================
-function initImageFallback() {
-  $$('img').forEach(img => {
-    img.addEventListener('error', () => {
-      if (img.dataset.fallbackApplied) return;
-      img.dataset.fallbackApplied = '1';
-      img.src = img.src.includes('images/')
-        ? img.src.replace(/images\/[^/]+$/, 'images/placeholder.png')
-        : 'images/placeholder.png';
+// ── PLASMA HOVER GLOW on stat cards ──
+function initPlasmaGlow() {
+  document.querySelectorAll('.stat-card, .fancy-skill-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.background = `
+        radial-gradient(circle at ${x}px ${y}px,
+          rgba(0,198,255,0.06) 0%,
+          rgba(12,26,46,0.6) 60%)
+      `;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.background = 'var(--glass-bg)';
     });
   });
 }
+
+// ── NAV hide-on-scroll-down / show-on-scroll-up ──
+function initNavScroll() {
+  let lastScrollY = 0;
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+      if (currentY > lastScrollY && currentY > 80) {
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        navbar.style.transform = 'translateY(0)';
+      }
+      lastScrollY = currentY;
+    }, { passive: true });
+  }
+}
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('year').textContent = new Date().getFullYear();
+  initThreeJS();
+  initAnimations();
+  initCursor();
+  initLightbox();
+  initPlasmaGlow();
+  initNavScroll();
+});

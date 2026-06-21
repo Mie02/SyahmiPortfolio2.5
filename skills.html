@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skills — Ahmad Syahmi Zufayri</title>
+  <meta name="description" content="Technical and creative skills of Ahmad Syahmi Zufayri." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+<body class="apple-theme">
+
+  <div id="webgl-container" aria-hidden="true"></div>
+  <div id="cursorGlow" aria-hidden="true"></div>
+  <div id="cursorDot" aria-hidden="true"></div>
+
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">SYZ.</a>
+      <nav class="links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="skills.html" class="active">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+  
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="biodata.html">Biodata</a>
+    <a href="skills.html">Skills</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+      
+      <!-- HERO SECTION -->
+      <section class="hero section-padding">
+        <div class="container text-center">
+          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">SYSTEM DIAGNOSTICS</div>
+          <h1 class="hero-title reveal-up" style="
+            font-family: 'Orbitron', var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(180deg, var(--stardust) 0%, var(--plasma) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+          ">
+            Capabilities &amp;<br>Skills.
+          </h1>
+          <p class="hero-subtitle reveal-up" style="
+            font-family: var(--font-mono);
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+          ">
+            Mastering the tools required to build interactive digital worlds.
+          </p>
+        </div>
+      </section>
+
+      <!-- SKILLS GRID -->
+      <section class="expertise section-padding" style="padding-top: 0;">
+        <div class="container">
+          
+          <style>
+            .fancy-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 2rem;
+              margin-bottom: 5rem;
+            }
+            .fancy-skill-card {
+              background: var(--glass-bg);
+              border: 1px solid var(--glass-border);
+              border-radius: 12px;
+              padding: 2.5rem;
+              position: relative;
+              overflow: hidden;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              min-height: 240px;
+              transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            }
+            .fancy-skill-card:hover {
+              transform: translateY(-8px);
+              box-shadow: 0 20px 40px rgba(0,198,255,0.15);
+              border-color: rgba(0,198,255,0.3);
+            }
+            .fancy-skill-card::before {
+              content: '';
+              position: absolute;
+              top: 0; left: 0; right: 0; bottom: 0;
+              background: radial-gradient(circle at top right, rgba(0, 198, 255, 0.08), transparent 60%);
+              pointer-events: none;
+            }
+            .fsc-top {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              margin-bottom: 2rem;
+            }
+            .fsc-icon {
+              width: 56px; height: 56px;
+              background: rgba(0,198,255,0.05);
+              border-radius: 12px;
+              display: flex; align-items: center; justify-content: center;
+              font-size: 1.8rem;
+              border: 1px solid rgba(0,198,255,0.15);
+              color: var(--plasma);
+            }
+            .fsc-ring-wrapper {
+              position: relative;
+              width: 70px; height: 70px;
+            }
+            .fsc-ring-wrapper svg {
+              width: 100%; height: 100%;
+              transform: rotate(-90deg);
+            }
+            .fsc-ring-bg {
+              fill: none; stroke: rgba(0,198,255,0.1); stroke-width: 3;
+            }
+            .fsc-ring-fill {
+              fill: none; stroke: var(--plasma); stroke-width: 3; stroke-linecap: round;
+              stroke-dasharray: 0, 100;
+              animation: drawRing 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+              filter: drop-shadow(0 0 4px var(--plasma));
+            }
+            @keyframes drawRing {
+              to { stroke-dasharray: var(--pct), 100; }
+            }
+            .fsc-percent {
+              position: absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%, -50%);
+              font-size: 1rem;
+              font-weight: 700;
+              font-family: 'Orbitron', var(--font-display);
+              color: var(--plasma);
+            }
+            .fsc-title {
+              font-family: 'Space Grotesk', sans-serif;
+              font-size: 1.5rem;
+              font-weight: 600;
+              margin-bottom: 0.8rem;
+              color: var(--stardust);
+              letter-spacing: -0.02em;
+            }
+            .fsc-desc {
+              font-family: var(--font-mono);
+              font-size: 0.85rem;
+              color: var(--text-muted);
+              line-height: 1.6;
+            }
+          </style>
+
+          <h2 class="section-title reveal-up text-center" style="margin-bottom: 3rem;">Development &amp; Code.</h2>
+          <div class="fancy-grid">
+            
+            <div class="fancy-skill-card reveal-up">
+              <div class="fsc-top">
+                <div class="fsc-icon">⚙️</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 85" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">85%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">C# / Unity</div>
+                <div class="fsc-desc">Game logic, UI programming, physics, and game mechanics.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up" style="transition-delay: 0.1s;">
+              <div class="fsc-top">
+                <div class="fsc-icon">📐</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 80; stroke:var(--stellar);" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">80%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">C++ / OpenGL</div>
+                <div class="fsc-desc">Graphics pipelines, shaders, rendering, and matrix mathematics.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up" style="transition-delay: 0.2s;">
+              <div class="fsc-top">
+                <div class="fsc-icon">🌐</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 75" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">75%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">Web Technologies</div>
+                <div class="fsc-desc">Frontend development, DOM manipulation, GSAP animations, WebGL.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up">
+              <div class="fsc-top">
+                <div class="fsc-icon">⌨️</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 70; stroke:var(--stellar);" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">70%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">Python &amp; Java</div>
+                <div class="fsc-desc">Scripting, automation, algorithms, and object-oriented programming.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <h2 class="section-title reveal-up text-center" style="margin-bottom: 3rem;">Creative &amp; Design.</h2>
+          <div class="fancy-grid">
+            
+            <div class="fancy-skill-card reveal-up">
+              <div class="fsc-top">
+                <div class="fsc-icon">✨</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 90; stroke:var(--supernova);" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">90%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">After Effects</div>
+                <div class="fsc-desc">Motion graphics, visual effects, compositing, and kinetic typography.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up" style="transition-delay: 0.1s;">
+              <div class="fsc-top">
+                <div class="fsc-icon">🧊</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 85" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">85%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">Blender 3D</div>
+                <div class="fsc-desc">3D modeling, texturing, shading, lighting, and rendering.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up" style="transition-delay: 0.2s;">
+              <div class="fsc-top">
+                <div class="fsc-icon">🎨</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 80; stroke:var(--stellar);" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">80%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">Photoshop</div>
+                <div class="fsc-desc">Image manipulation, UI asset creation, and layout design.</div>
+              </div>
+            </div>
+
+            <div class="fancy-skill-card reveal-up">
+              <div class="fsc-top">
+                <div class="fsc-icon">🎞️</div>
+                <div class="fsc-ring-wrapper">
+                  <svg viewBox="0 0 36 36"><path class="fsc-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path class="fsc-ring-fill" style="--pct: 75; stroke:var(--supernova);" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+                  <div class="fsc-percent">75%</div>
+                </div>
+              </div>
+              <div>
+                <div class="fsc-title">Premiere Pro</div>
+                <div class="fsc-desc">Video editing, audio mixing, and color grading.</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container text-center">
+          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+            &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
+          </p>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
