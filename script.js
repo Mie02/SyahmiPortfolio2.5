@@ -1,389 +1,407 @@
-// =============================================
-// APPLE AESTHETIC 3D PORTFOLIO — apple-script.js
-// =============================================
-
-gsap.registerPlugin(ScrollTrigger);
-
-// ─── 1. LENIS SMOOTH SCROLL ───
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  infinite: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-// Connect Lenis to ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time)=>{
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0, 0);
-
-// ─── 2. THREE.JS INTERACTIVE TERRAIN ───
-function initThreeJS() {
-  const container = document.getElementById('webgl-container');
-  if (!container) return;
-
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x000000, 0.04);
-
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 5, 20); // Look down slightly at the terrain
-
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-  scene.add(ambientLight);
-
-  const dirLight = new THREE.DirectionalLight(0x2997ff, 3);
-  dirLight.position.set(10, 20, 10);
-  scene.add(dirLight);
-
-  const pointLight = new THREE.PointLight(0xff0055, 3, 100);
-  pointLight.position.set(-10, 10, -10);
-  scene.add(pointLight);
-
-  // Wavy Terrain Geometry
-  const geometry = new THREE.PlaneGeometry(150, 150, 80, 80);
-  
-  // Solid base
-  const solidMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x050505,
-    metalness: 0.9,
-    roughness: 0.4,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.2
-  });
-  const planeSolid = new THREE.Mesh(geometry, solidMaterial);
-  
-  // Wireframe glowing grid on top
-  const wireMaterial = new THREE.MeshBasicMaterial({
-    color: 0x0a4488,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.25
-  });
-  const planeWire = new THREE.Mesh(geometry, wireMaterial);
-  planeSolid.add(planeWire);
-
-  planeSolid.rotation.x = -Math.PI / 2;
-  planeSolid.position.y = -8;
-  scene.add(planeSolid);
-
-  // Buffer references
-  const positionAttribute = geometry.attributes.position;
-
-  // Mouse Interaction
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2();
-  let targetPoint = new THREE.Vector3(0, -1000, 0); // Far away initially
-  let currentPoint = new THREE.Vector3(0, -1000, 0);
-
-  document.addEventListener('mousemove', (e) => {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-  });
-
-  const clock = new THREE.Clock();
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const elapsedTime = clock.getElapsedTime();
-
-    // Raycast to find mouse position on plane
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObject(planeSolid);
-    if (intersects.length > 0) {
-      targetPoint.copy(intersects[0].point);
-    }
-    // Lerp current point to target point for smooth ripples
-    currentPoint.lerp(targetPoint, 0.05);
-
-    // Update vertices for wave and ripple effect
-    for (let i = 0; i < positionAttribute.count; i++) {
-      const vx = positionAttribute.getX(i);
-      const vy = positionAttribute.getY(i);
-      
-      // Basic wave math
-      const wave1 = Math.sin(vx * 0.1 + elapsedTime) * 1.5;
-      const wave2 = Math.cos(vy * 0.1 + elapsedTime * 0.8) * 1.5;
-      
-      // Interactive Ripple math
-      const worldX = vx;
-      const worldZ = -vy;
-      const dist = Math.sqrt(Math.pow(worldX - currentPoint.x, 2) + Math.pow(worldZ - currentPoint.z, 2));
-      
-      let ripple = 0;
-      if (dist < 20) {
-        // Create a ripple burst outward from the mouse
-        ripple = Math.cos(dist * 1.2 - elapsedTime * 6) * (20 - dist) * 0.2;
-      }
-
-      positionAttribute.setZ(i, wave1 + wave2 + ripple);
-    }
-    
-    positionAttribute.needsUpdate = true;
-    geometry.computeVertexNormals(); // Update lighting based on new waves
-
-    // Gentle camera pan based on mouse
-    camera.position.x += (mouse.x * 3 - camera.position.x) * 0.02;
-    camera.lookAt(0, -3, 0);
-
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  // Scroll link to move camera through the terrain
-  ScrollTrigger.create({
-    trigger: document.body,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    onUpdate: (self) => {
-      camera.position.z = 20 - (self.progress * 35);
-      camera.position.y = 5 - (self.progress * 6);
-      camera.lookAt(0, -3, 0);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-}
-
-// ─── 3. GSAP ANIMATIONS ───
-function initAnimations() {
-  // Reveal Up (Title, Subtitles)
-  const reveals = document.querySelectorAll('.reveal-up');
-  reveals.forEach(el => {
-    gsap.fromTo(el, 
-      { y: 50, opacity: 0, autoAlpha: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        autoAlpha: 1, 
-        duration: 1, 
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-  });
-
-  // Horizontal Scroll for Projects
-  const horizontalTrack = document.getElementById('horizontalTrack');
-  if (horizontalTrack) {
-    const wrap = document.querySelector('.horizontal-scroll-container');
-    const scrollWidth = horizontalTrack.scrollWidth - window.innerWidth + window.innerWidth * 0.1;
-
-    gsap.to(horizontalTrack, {
-      x: () => -scrollWidth + "px",
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".projects-pin-section",
-        start: "top top",
-        end: () => "+=" + scrollWidth,
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1
-      }
+/* Shared classic entry point. Existing page interactions + one animation clock.
+ * The procedural scene lives in space.js. Three r128 is conditionally loaded there.
+ * Pagehide disposes scene/UI resources; the lifecycle pair restores BFCache pages.
+ */
+(function () {
+  'use strict';
+  const entryURL = document.currentScript.src;
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+  let runtime = null;
+  let enginePromise = null;
+  let motionOptIn = false;
+  try { motionOptIn = sessionStorage.getItem('syz-motion-enabled') === 'true'; } catch (_) {}
+  if (gsap && ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+  function loadEngine() {
+    if (window.SpaceFX) return Promise.resolve(window.SpaceFX);
+    if (!enginePromise) enginePromise = new Promise(resolve => {
+      const script = document.createElement('script');
+      script.src = new URL('space.js', entryURL).href;
+      script.async = true;
+      script.onload = () => { script.onload = script.onerror = null; resolve(window.SpaceFX || null); };
+      script.onerror = () => { script.onload = script.onerror = null; resolve(null); };
+      document.head.appendChild(script);
     });
+    return enginePromise;
   }
-
-  // Sticky Navbar
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
-  // Hamburger Menu
-  const btn = document.getElementById('hamburger');
-  const menu = document.getElementById('mobileMenu');
-  btn.addEventListener('click', () => {
-    const isOpen = menu.classList.contains('open');
-    if(isOpen) {
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    } else {
-      menu.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
-  });
-}
-
-// ─── 4. CUSTOM MAGNETIC CURSOR ───
-function initCursor() {
-  const cursorDot = document.getElementById('cursorDot');
-  const cursorGlow = document.getElementById('cursorGlow');
-  if (!cursorDot || !cursorGlow) return;
-
-  if (window.matchMedia('(pointer: coarse)').matches) {
-    cursorDot.style.display = 'none';
-    cursorGlow.style.display = 'none';
-    return;
+  function on(r, target, event, callback, options) {
+    target.addEventListener(event, callback, options);
+    r.cleanup.push(() => target.removeEventListener(event, callback, options));
   }
-
-  let mouse = { x: window.innerWidth/2, y: window.innerHeight/2 };
-  let pos = { x: window.innerWidth/2, y: window.innerHeight/2 };
-  const speed = 0.15;
-
-  window.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    cursorDot.style.left = mouse.x + 'px';
-    cursorDot.style.top = mouse.y + 'px';
-  });
-
-  const xSet = gsap.quickSetter(cursorGlow, "x", "px");
-  const ySet = gsap.quickSetter(cursorGlow, "y", "px");
-
-  gsap.ticker.add(() => {
-    pos.x += (mouse.x - pos.x) * speed;
-    pos.y += (mouse.y - pos.y) * speed;
-    xSet(pos.x - window.innerWidth/2);
-    ySet(pos.y - window.innerHeight/2);
-    // Since cursorGlow is translated by -50%, -50% in CSS, we just need to set left/top to mouse pos
-    // Wait, the quickSetter sets transform X/Y. If CSS has left:0, top:0, transform: translate(-50%,-50%), 
-    // we should just set left and top, or update the quickSetter.
-  });
-
-  // Fix: quickSetter is better for transform, but let's just use vanilla JS for glow left/top
-  function updateGlow() {
-    cursorGlow.style.left = pos.x + 'px';
-    cursorGlow.style.top = pos.y + 'px';
-    requestAnimationFrame(updateGlow);
+  function stopClock(r) {
+    if (!r.clockRunning) return;
+    if (gsap) gsap.ticker.remove(r.frame); else cancelAnimationFrame(r.rafId);
+    r.clockRunning = false; r.lastTime = null;
   }
-  updateGlow();
-
-  const interactives = document.querySelectorAll('a, button');
-  interactives.forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
-  });
-}
-
-// ─── 5. IMAGE LIGHTBOX (ZOOM) ───
-function initLightbox() {
-  // Create lightbox HTML if it doesn't exist
-  let lightbox = document.getElementById('lightbox');
-  if (!lightbox) {
-    lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.id = 'lightbox';
-    lightbox.innerHTML = `
-      <button class="lightbox-close" aria-label="Close">&times;</button>
-      <img id="lightbox-img" src="" alt="Zoomed image">
-    `;
-    document.body.appendChild(lightbox);
+  function startClock(r) {
+    if (r.disposed || r.reduced || document.hidden || r.clockRunning) return;
+    r.clockRunning = true;
+    if (gsap) gsap.ticker.add(r.frame); else r.rafId = requestAnimationFrame(r.nativeFrame);
   }
-
-  const lightboxImg = document.getElementById('lightbox-img');
-  const closeBtn = lightbox.querySelector('.lightbox-close');
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    setTimeout(() => {
-      lightboxImg.src = '';
-    }, 300);
-  }
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) {
-      closeLightbox();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-      closeLightbox();
-    }
-  });
-
-  // Select all images on the page that should be zoomable
-  const images = document.querySelectorAll('img');
-  images.forEach(img => {
-    // Exclude images inside project cards (which are links) or other non-zoomable contexts
-    if (!img.closest('a') && !img.closest('.project-img-wrapper')) {
-      img.classList.add('zoomable');
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('active');
-      });
-      // Add hover effect for custom cursor if active
-      img.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-      img.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
-    }
-  });
-}
-
-// ── PLASMA HOVER GLOW on stat cards ──
-function initPlasmaGlow() {
-  document.querySelectorAll('.stat-card, .fancy-skill-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.background = `
-        radial-gradient(circle at ${x}px ${y}px,
-          rgba(0,198,255,0.06) 0%,
-          rgba(12,26,46,0.6) 60%)
-      `;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.background = 'var(--glass-bg)';
-    });
-  });
-}
-
-// ── NAV hide-on-scroll-down / show-on-scroll-up ──
-function initNavScroll() {
-  let lastScrollY = 0;
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      const currentY = window.scrollY;
-      if (currentY > lastScrollY && currentY > 80) {
-        navbar.style.transform = 'translateY(-100%)';
+  function setupClock(r) {
+    r.frame = () => {
+      if (r.disposed || document.hidden || r.reduced) return;
+      const now = performance.now();
+      const delta = r.lastTime === null ? 16.67 : Math.min(now - r.lastTime, 50);
+      r.lastTime = now;
+      if (r.lenis) r.lenis.raf(now);
+      if (r.cursor) {
+        const ease = 1 - Math.exp(-delta / 95);
+        r.cursor.x += (r.cursor.targetX - r.cursor.x) * ease;
+        r.cursor.y += (r.cursor.targetY - r.cursor.y) * ease;
+        r.cursor.glow.style.left = r.cursor.x + 'px';
+        r.cursor.glow.style.top = r.cursor.y + 'px';
+      }
+      if (window.SpaceFX) window.SpaceFX.update(now);
+    };
+    r.nativeFrame = () => {
+      if (!r.clockRunning) return;
+      r.frame();
+      if (r.clockRunning) r.rafId = requestAnimationFrame(r.nativeFrame);
+    };
+    on(r, document, 'visibilitychange', () => {
+      document.body.classList.toggle('space-paused', document.hidden);
+      if (document.hidden) {
+        stopClock(r); if (r.lenis) r.lenis.stop(); if (window.SpaceFX) SpaceFX.pause();
       } else {
-        navbar.style.transform = 'translateY(0)';
+        if (r.lenis) r.lenis.start(); if (window.SpaceFX) SpaceFX.resume(); startClock(r);
       }
-      lastScrollY = currentY;
+    });
+    startClock(r);
+  }
+  function setupScrolling(r) {
+    if (r.reduced || !window.Lenis) return;
+    try {
+      r.lenis = new window.Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical', gestureDirection: 'vertical', smooth: true, mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2, infinite: false });
+      if (ScrollTrigger) r.lenis.on('scroll', ScrollTrigger.update);
+      if (gsap) gsap.ticker.lagSmoothing(0, 0);
+    } catch (_) { r.lenis = null; }
+  }
+  function setupNavigation(r) {
+    const nav = document.getElementById('navbar'), button = document.getElementById('hamburger'), menu = document.getElementById('mobileMenu');
+    const mobile = matchMedia('(max-width: 768px)');
+    const setMenu = (open, returnFocus) => {
+      if (!menu || !button) return;
+      r.menuOpen = open;
+      menu.hidden = !open; menu.inert = !open;
+      menu.classList.toggle('open', open);
+      menu.setAttribute('aria-hidden', String(!open));
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('menu-open', open);
+      const main = document.getElementById('smooth-wrapper'), footer = document.querySelector('body > footer'), controls = document.querySelector('.space-controls');
+      if (main) main.inert = open;
+      if (footer) footer.inert = open;
+      if (controls) controls.inert = open;
+      if (open) { if (r.lenis) r.lenis.stop(); menu.querySelector('a').focus(); }
+      else { if (r.lenis && !document.hidden) r.lenis.start(); if (returnFocus) button.focus(); }
+      if (nav) nav.style.transform = '';
+    };
+    let previous = scrollY;
+    const update = () => {
+      if (!nav) return;
+      nav.classList.toggle('scrolled', scrollY > 50);
+      if (!r.home && !r.menuOpen && !nav.contains(document.activeElement)) nav.style.transform = scrollY > previous && scrollY > 80 ? 'translateY(-100%)' : 'translateY(0)';
+      previous = scrollY;
+    };
+    on(r, window, 'scroll', update, { passive: true }); update();
+    if (button && menu) {
+      setMenu(false, false);
+      on(r, button, 'click', () => setMenu(!r.menuOpen, false));
+      on(r, document, 'keydown', event => {
+        if (!r.menuOpen) return;
+        if (event.key === 'Escape') { event.preventDefault(); setMenu(false, true); }
+        if (event.key === 'Tab') {
+          const links = Array.from(menu.querySelectorAll('a[href]'));
+          const items = [button].concat(links), index = items.indexOf(document.activeElement);
+          if (event.shiftKey && index <= 0) { event.preventDefault(); items[items.length - 1].focus(); }
+          else if (!event.shiftKey && (index === items.length - 1 || index < 0)) { event.preventDefault(); button.focus(); }
+        }
+      });
+      on(r, menu, 'click', event => {
+        if (!event.target.closest('a[href]')) return;
+        setMenu(false, false);
+        document.getElementById('smooth-wrapper').focus({ preventScroll: true });
+      });
+      on(r, mobile, 'change', () => { if (!mobile.matches) setMenu(false, false); });
+      r.cleanup.push(() => setMenu(false, false));
+    }
+    if (nav) on(r, nav, 'focusin', () => { nav.style.transform = ''; });
+    const skip = document.querySelector('.skip-link'), main = document.getElementById('smooth-wrapper');
+    if (skip && main) on(r, skip, 'click', event => {
+      event.preventDefault(); setMenu(false, false); main.focus({ preventScroll: true });
+      if (r.lenis && !r.reduced) r.lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0);
+    });
+  }
+  function setupAnimations(r) {
+    if (!gsap || !ScrollTrigger || r.reduced) return;
+    document.documentElement.classList.add('has-reveal-animation');
+    r.animationContext = gsap.context(() => {
+      document.querySelectorAll('.reveal-up').forEach(element => {
+        const heroPart = element.closest('.hero-copy');
+        const introOrder = heroPart ? Array.from(heroPart.querySelectorAll('.reveal-up')).indexOf(element) : 0;
+        gsap.fromTo(element, { y: heroPart ? 38 : 50, autoAlpha: 0, rotationX: heroPart ? 12 : 0 }, { y: 0, rotationX: 0, autoAlpha: 1, duration: 1.15, delay: introOrder * .12, ease: 'power3.out',
+          scrollTrigger: { trigger: element, start: 'top 85%', toggleActions: 'play none none reverse' } });
+      });
+      const gallery = document.getElementById('galleryCamera');
+      if (gallery) {
+        const section = document.getElementById('projects-showcase');
+        r.galleryMedia = gsap.matchMedia();
+        r.galleryMedia.add('(min-width: 1024px)', () => {
+          if (r.galleryKeyboard) return;
+          section.classList.add('gallery-spatial');
+          gsap.to(gallery, { z: 4500, rotationZ: 2.2, ease: 'none', scrollTrigger: {
+            trigger: section, start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true
+          } });
+          const projectCards = Array.from(gallery.querySelectorAll('.gallery-item'));
+          projectCards.forEach((card,i) => {
+            gsap.fromTo(card, { rotationY: i % 2 ? -14 : 14 }, { rotationY: 0, ease: 'none', scrollTrigger: {
+              trigger: section, start: () => 'top+=' + (section.offsetHeight - innerHeight) * Math.max(0,(i-.65)/3) + ' top',
+              end: () => 'top+=' + (section.offsetHeight - innerHeight) * Math.min(1,(i+.25)/3) + ' top', scrub: .6, invalidateOnRefresh: true
+            } });
+          });
+          return () => section.classList.remove('gallery-spatial');
+        });
+        // Focusing a project reveals every card in normal document order.
+        on(r, gallery, 'focusin', event => {
+          if (!section.classList.contains('gallery-spatial')) return;
+          r.galleryKeyboard = true; r.galleryMedia.revert();
+          ScrollTrigger.refresh();
+          event.target.scrollIntoView({ block: 'center', behavior: 'auto' });
+          if (r.lenis) r.lenis.resize();
+        });
+      }
+      const track = document.getElementById('horizontalTrack');
+      if (track) {
+        const distance = () => track.scrollWidth - innerWidth + innerWidth * 0.1;
+        gsap.to(track, { x: () => -distance(), ease: 'none', scrollTrigger: { trigger: '.projects-pin-section', start: 'top top', end: () => '+=' + distance(), scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
+      }
+    });
+  }
+  function setupCursor(r) {
+    const fine = matchMedia('(hover: hover) and (pointer: fine)');
+    if (r.reduced) return;
+    const dot = document.getElementById('cursorDot'), glow = document.getElementById('cursorGlow');
+    if (!dot || !glow) return;
+    const sync = () => {
+      const enabled = fine.matches;
+      document.body.classList.toggle('custom-cursor-ready', enabled);
+      if (!enabled) { r.cursor = null; document.body.classList.remove('hover-active'); }
+      else r.cursor = { glow, x: innerWidth / 2, y: innerHeight / 2, targetX: innerWidth / 2, targetY: innerHeight / 2 };
+    };
+    on(r, fine, 'change', sync); sync();
+    on(r, window, 'pointermove', event => {
+      if (!r.cursor) return;
+      r.cursor.targetX = event.clientX; r.cursor.targetY = event.clientY;
+      dot.style.left = event.clientX + 'px'; dot.style.top = event.clientY + 'px';
+    }, { passive: true });
+    on(r, document, 'pointerover', event => {
+      document.body.classList.toggle('hover-active', Boolean(event.target.closest('a,button,.zoomable')));
+    }, { passive: true });
+    on(r, document, 'pointerout', event => {
+      if (!event.relatedTarget || !event.relatedTarget.closest || !event.relatedTarget.closest('a,button,.zoomable')) document.body.classList.remove('hover-active');
     }, { passive: true });
   }
-}
-
-// ─── INIT ───
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('year').textContent = new Date().getFullYear();
-  initThreeJS();
-  initAnimations();
-  initCursor();
-  initLightbox();
-  initPlasmaGlow();
-  initNavScroll();
-});
+  function setupLightbox(r) {
+    if (r.home) return;
+    const lightbox = document.createElement('div'); lightbox.className = 'lightbox'; lightbox.id = 'lightbox';
+    lightbox.setAttribute('role', 'dialog'); lightbox.setAttribute('aria-modal', 'true'); lightbox.setAttribute('aria-label', 'Image preview');
+    lightbox.hidden = true; lightbox.inert = true;
+    lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">&times;</button><img id="lightbox-img" width="1" height="1" alt="Zoomed image">';
+    document.body.appendChild(lightbox); r.cleanup.push(() => lightbox.remove());
+    const large = lightbox.querySelector('img');
+    let timer, opener;
+    const closeButton = lightbox.querySelector('button');
+    const unlock = () => { document.getElementById('smooth-wrapper').inert = false; document.getElementById('navbar').inert = false; document.querySelector('body > footer').inert = false; const controls = document.querySelector('.space-controls'); if (controls) controls.inert = false; };
+    r.cleanup.push(() => { clearTimeout(timer); unlock(); });
+    const close = () => {
+      lightbox.classList.remove('active'); lightbox.hidden = true; lightbox.inert = true; clearTimeout(timer); unlock();
+      if (r.lenis && !document.hidden) r.lenis.start();
+      if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+      large.removeAttribute('src');
+    };
+    on(r, lightbox, 'click', event => { if (event.target !== large) close(); });
+    on(r, document, 'keydown', event => {
+      if (!lightbox.classList.contains('active')) return;
+      if (event.key === 'Escape') { event.preventDefault(); close(); }
+      if (event.key === 'Tab') { event.preventDefault(); closeButton.focus(); }
+    });
+    document.querySelectorAll('main img').forEach(image => {
+      if (image.closest('a') || image.closest('.project-img-wrapper')) return;
+      image.classList.add('zoomable');
+      const trigger = document.createElement('button'); trigger.type = 'button'; trigger.className = 'image-preview-trigger';
+      trigger.setAttribute('aria-label', 'Enlarge image: ' + image.alt); trigger.setAttribute('aria-haspopup', 'dialog');
+      const picture = image.closest('picture') || image;
+      picture.before(trigger); trigger.appendChild(picture);
+      r.cleanup.push(() => { trigger.before(picture); trigger.remove(); });
+      on(r, trigger, 'click', () => {
+        clearTimeout(timer); large.width = image.naturalWidth || Number(image.getAttribute('width')) || 1;
+        large.height = image.naturalHeight || Number(image.getAttribute('height')) || 1;
+        large.src = image.currentSrc || image.src; large.alt = image.alt; opener = trigger;
+        lightbox.hidden = false; lightbox.inert = false; lightbox.classList.add('active'); closeButton.focus();
+        document.getElementById('smooth-wrapper').inert = true; document.getElementById('navbar').inert = true;
+        document.querySelector('body > footer').inert = true;
+        const controls = document.querySelector('.space-controls'); if (controls) controls.inert = true;
+        if (r.lenis) r.lenis.stop();
+      });
+    });
+  }
+  function setupHover(r) {
+    if (r.reduced) return;
+    const fine = matchMedia('(hover: hover) and (pointer: fine)');
+    document.querySelectorAll('.stat-card,.fancy-skill-card,.project-card').forEach(card => {
+      card.classList.add('depth-card');
+      const reset = () => { card.classList.remove('depth-active'); card.style.removeProperty('--tilt-x'); card.style.removeProperty('--tilt-y'); };
+      on(r, card, 'pointermove', event => {
+        if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
+        const rect = card.getBoundingClientRect();
+        const x = Math.max(-.5,Math.min(.5,(event.clientX - rect.left) / rect.width - .5));
+        const y = Math.max(-.5,Math.min(.5,(event.clientY - rect.top) / rect.height - .5));
+        card.classList.add('depth-active');
+        card.style.setProperty('--tilt-x', (-y * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--tilt-y', (x * 12).toFixed(2) + 'deg');
+      }, { passive: true });
+      on(r, card, 'pointerleave', reset); on(r, card, 'pointercancel', reset);
+      on(r, card, 'focusin', reset); on(r, fine, 'change', reset);
+      r.cleanup.push(() => { reset(); card.classList.remove('depth-card'); });
+    });
+  }
+  function setupProjectFilters(r) {
+    const grid = document.getElementById('project-grid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('[data-project-tags]'));
+    const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+    const status = document.getElementById('project-filter-status');
+    const keys = buttons.map(button => button.dataset.filter);
+    let active = 'all', measuredWidth = 0;
+    const apply = key => {
+      active = keys.includes(key) ? key : 'all';
+      let count = 0;
+      cards.forEach(card => {
+        const visible = active === 'all' || card.dataset.projectTags.split(/\s+/).includes(active);
+        card.hidden = !visible; card.inert = !visible;
+        if (visible) count++;
+      });
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === active)));
+      status.textContent = count + (count === 1 ? ' project' : ' projects');
+      grid.dataset.activeFilter = active;
+      if (ScrollTrigger) ScrollTrigger.refresh();
+    };
+    const measure = () => {
+      if (r.disposed) return;
+      cards.forEach(card => { card.hidden = false; card.inert = false; });
+      grid.style.minHeight = '';
+      const height = grid.getBoundingClientRect().height;
+      grid.style.minHeight = Math.ceil(height) + 'px';
+      measuredWidth = grid.getBoundingClientRect().width;
+      apply(active);
+      if (r.lenis) r.lenis.resize();
+    };
+    buttons.forEach(button => on(r, button, 'click', () => {
+      apply(button.dataset.filter);
+      try { history.pushState(null, '', '#' + active); } catch (_) {}
+    }));
+    const readHash = () => {
+      const key = location.hash.slice(1).toLowerCase();
+      if (keys.includes(key)) apply(key); else if (!key) apply('all');
+    };
+    if (keys.includes(location.hash.slice(1).toLowerCase())) active = location.hash.slice(1).toLowerCase();
+    measure();
+    on(r, window, 'hashchange', readHash); on(r, window, 'popstate', readHash);
+    if (window.ResizeObserver) {
+      const observer = new ResizeObserver(() => {
+        if (Math.abs(grid.getBoundingClientRect().width - measuredWidth) > 1) measure();
+      });
+      observer.observe(grid); r.cleanup.push(() => observer.disconnect());
+    } else on(r, window, 'resize', measure, { passive: true });
+    if (document.fonts) document.fonts.ready.then(() => { if (!r.disposed) measure(); });
+    r.cleanup.push(() => {
+      cards.forEach(card => { card.hidden = false; card.inert = false; }); grid.style.minHeight = '';
+    });
+  }
+  function setupCopyEmail(r) {
+    const button = document.getElementById('copy-email');
+    if (!button) return;
+    const status = document.getElementById('copy-email-status');
+    const fallback = document.getElementById('email-copy-fallback'), field = document.getElementById('email-copy-value');
+    button.disabled = false;
+    const legacyCopy = value => {
+      const buffer = document.createElement('textarea'); buffer.value = value; buffer.readOnly = true;
+      buffer.className = 'clipboard-buffer'; document.body.appendChild(buffer); buffer.select();
+      let copied = false;
+      try { copied = Boolean(document.execCommand && document.execCommand('copy')); } catch (_) {}
+      buffer.remove(); return copied;
+    };
+    on(r, button, 'click', async () => {
+      button.disabled = true; status.textContent = ''; fallback.hidden = true;
+      let copied = false;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(button.dataset.email); copied = true;
+        }
+      } catch (_) {}
+      if (r.disposed) return;
+      if (!copied) copied = legacyCopy(button.dataset.email);
+      button.disabled = false;
+      if (copied) { status.textContent = 'Email address copied.'; button.focus({ preventScroll: true }); }
+      else {
+        fallback.hidden = false; field.focus(); field.select();
+        status.textContent = 'Copy this selected email address.';
+      }
+    });
+    r.cleanup.push(() => { button.disabled = false; status.textContent = ''; fallback.hidden = true; });
+  }
+  function dispose() {
+    const r = runtime; if (!r || r.disposed) return;
+    r.disposed = true; stopClock(r);
+    if (window.SpaceFX) SpaceFX.dispose();
+    if (r.galleryMedia) r.galleryMedia.revert();
+    if (r.animationContext) r.animationContext.revert();
+    if (r.lenis) r.lenis.destroy();
+    r.cleanup.splice(0).forEach(remove => remove());
+    document.documentElement.classList.remove('has-reveal-animation','reduced-motion');
+    document.body.classList.remove('custom-cursor-ready','hover-active','space-paused');
+  }
+  async function init() {
+    if (runtime && !runtime.disposed) dispose();
+    const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
+    const r = { reduced: reducedQuery.matches && !motionOptIn, home: document.body.dataset.page === 'home', disposed: false,
+      cleanup: [], lenis: null, cursor: null, clockRunning: false, lastTime: null, animationContext: null };
+    runtime = r;
+    document.documentElement.classList.toggle('motion-opt-in', motionOptIn);
+    document.documentElement.classList.toggle('reduced-motion', r.reduced);
+    const year = document.getElementById('year'); if (year) year.textContent = new Date().getFullYear();
+    setupScrolling(r); setupNavigation(r); setupLightbox(r); setupHover(r); setupCursor(r);
+    setupProjectFilters(r); setupCopyEmail(r);
+    try { setupAnimations(r); }
+    catch (_) { if (r.animationContext) r.animationContext.revert(); document.documentElement.classList.remove('has-reveal-animation'); }
+    // Gallery mode and font layout can change the document after Lenis measures it.
+    if (r.lenis) {
+      r.lenis.resize();
+      if (window.ResizeObserver) {
+        const observer = new ResizeObserver(() => { if (!r.disposed) r.lenis.resize(); });
+        observer.observe(document.body); r.cleanup.push(() => observer.disconnect());
+      }
+    }
+    setupClock(r);
+    on(r, reducedQuery, 'change', () => init());
+    on(r, window, 'portfolio:enable-motion', () => {
+      motionOptIn = true;
+      try { sessionStorage.setItem('syz-motion-enabled', 'true'); } catch (_) {}
+      init();
+    });
+    const engine = await loadEngine(); if (r.disposed || !engine) return;
+    await engine.init({ lenis: r.lenis });
+    if (!r.disposed && ScrollTrigger) ScrollTrigger.refresh();
+    if (!r.disposed && r.lenis) r.lenis.resize();
+  }
+  // This lifecycle pair survives pagehide solely for BFCache recovery.
+  window.addEventListener('pagehide', dispose);
+  window.addEventListener('pageshow', event => { if (event.persisted) init(); });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
+  window.PortfolioRuntime = Object.freeze({ getStatus: () => ({ running: Boolean(runtime && runtime.clockRunning),
+    reducedMotion: Boolean(runtime && runtime.reduced), listeners: runtime ? runtime.cleanup.length : 0,
+    clock: gsap ? 'gsap' : 'native-rAF', lenis: Boolean(runtime && runtime.lenis), cursor: Boolean(runtime && runtime.cursor),
+    menuOpen: Boolean(runtime && runtime.menuOpen), disposed: !runtime || runtime.disposed }) });
+})();

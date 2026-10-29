@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>[PLACEHOLDER: SITE_URL]/</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/biodata.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/skills.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/drag-and-drop-game.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/opengl-cafeteria.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/blender-workshop-2.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/bujang-lapok.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/computer-animation.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/motion-graphics.html</loc></url>
+  <url><loc>[PLACEHOLDER: SITE_URL]/projects/fyp-ar-navigation.html</loc></url>
+</urlset>

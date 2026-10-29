@@ -4,24 +4,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ahmad Syahmi Zufayri — Developer Portfolio</title>
-  <meta name="description"
-    content="Portfolio of Ahmad Syahmi Zufayri — Unity developer, OpenGL 3D builder, motion graphics editor, and Blender creator." />
+  <title>Ahmad Syahmi Zufayri — Interactive Media Portfolio</title>
+  <meta name="description" content="Explore Ahmad Syahmi Zufayri’s interactive games, OpenGL scenes, Blender projects and motion graphics. Available for internships." />
+
+
+
+
+  <!-- SEO and sharing -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="[PLACEHOLDER: SITE_URL]/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ahmad Syahmi Zufayri" />
+  <meta property="og:title" content="Ahmad Syahmi Zufayri — Interactive Media Portfolio" />
+  <meta property="og:description" content="Explore Ahmad Syahmi Zufayri’s interactive games, OpenGL scenes, Blender projects and motion graphics. Available for internships." />
+  <meta property="og:url" content="[PLACEHOLDER: SITE_URL]/" />
+  <meta property="og:image" content="[PLACEHOLDER: SITE_URL]/images/dd3.png" />
+  <meta property="og:image:alt" content="Educational Flashcard drag-and-drop game" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ahmad Syahmi Zufayri — Interactive Media Portfolio" />
+  <meta name="twitter:description" content="Explore Ahmad Syahmi Zufayri’s interactive games, OpenGL scenes, Blender projects and motion graphics. Available for internships." />
+  <meta name="twitter:image" content="[PLACEHOLDER: SITE_URL]/images/dd3.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Ahmad Syahmi Zufayri", "url": "[PLACEHOLDER: SITE_URL]/", "sameAs": ["https://github.com/Mie02"]}</script>
+  <!-- /SEO and sharing -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="apple.css" />
-  <!-- Core Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
-<body class="apple-theme">
+<body class="apple-theme" data-page="home" data-space="hero">
+  <a class="skip-link" href="#smooth-wrapper">Skip to content</a>
 
   <!-- WebGL Background -->
-  <div id="webgl-container" aria-hidden="true"></div>
+  <div id="webgl-container" aria-hidden="true">
+    <div class="space-fallback"><span></span><span></span></div>
+  </div>
 
   <!-- Custom Magnetic Cursor -->
   <div id="cursorGlow" aria-hidden="true"></div>
@@ -31,90 +52,86 @@
   <header class="nav" id="navbar">
     <div class="nav-inner">
       <a class="logo" href="index.html">SYZ.</a>
-      <nav class="links">
-        <a href="index.html" class="active">Home</a>
+      <nav class="links" aria-label="Primary navigation">
+        <a href="index.html" class="active" aria-current="page">Home</a>
         <a href="projects.html">Projects</a>
         <a href="biodata.html">Biodata</a>
         <a href="skills.html">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" type="button" aria-controls="mobileMenu" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
       </button>
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true" hidden inert>
     <a href="index.html">Home</a>
     <a href="projects.html">Projects</a>
     <a href="biodata.html">Biodata</a>
     <a href="skills.html">Skills</a>
     <a href="#contact">Contact</a>
-  </div>
+  </nav>
 
-  <main id="smooth-wrapper">
+  <main id="smooth-wrapper" tabindex="-1">
     <div id="smooth-content">
 
       <!-- HERO SECTION -->
-      <section class="hero section-padding" style="min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative;">
-        <div class="container text-center" style="position:relative; z-index:10;">
+      <section class="hero section-padding hero-style-29 immersive-hero">
+        <div class="container hero-layout">
+        <div class="hero-copy container-style-30">
 
           <!-- Eyebrow -->
-          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">
+          <div class="eyebrow reveal-up eyebrow-style-1">
             TRANSMISSION INCOMING
           </div>
 
           <!-- Name — Orbitron + plasma glow -->
-          <h1 class="hero-title reveal-up" style="
-            font-family: 'Orbitron', var(--font-display);
-            font-size: clamp(3.5rem, 10vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, var(--stardust) 0%, var(--plasma) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: none;
-            filter: drop-shadow(0 0 40px rgba(0,198,255,0.35));
-          ">
+          <h1 class="hero-title reveal-up hero-title-style-31">
             Ahmad<br>
-            <span style="font-weight:400; letter-spacing:0.05em;">Syahmi.</span>
+            <span class="span-style-32">Syahmi.</span>
           </h1>
 
           <!-- Tagline -->
-          <p class="hero-subtitle reveal-up" style="
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            border-left: none;
-            padding-left: 0;
-            text-align: center;
-            margin-bottom: 3rem;
-          ">
+          <p class="hero-subtitle reveal-up hero-subtitle-style-33">
             Vibe Coder &nbsp;·&nbsp; Developer &nbsp;·&nbsp; Designer
           </p>
 
+          <p class="hero-value">Building interactive games, 3D scenes and motion graphics.</p>
+
           <!-- CTAs -->
-          <div class="hero-cta reveal-up" style="justify-content:center; gap:1.5rem;">
-            <a href="projects.html" class="btn btn-primary">Explore Work</a>
-            <a href="biodata.html" class="btn btn-secondary">About Me</a>
+          <div class="hero-cta reveal-up hero-cta-style-34">
+            <a href="projects.html" class="btn btn-primary">View Projects</a>
+            <button type="button" class="btn btn-secondary" disabled data-cv-path="[PLACEHOLDER: CV path]" aria-describedby="cv-pending">Download CV</button>
           </div>
+
+          <p id="cv-pending" class="pending-note">[PLACEHOLDER: CV path]</p>
 
           <!-- Scroll indicator -->
-          <div class="reveal-up" style="margin-top:4rem;">
-            <div style="
-              font-family: var(--font-mono);
-              font-size: 0.65rem;
-              letter-spacing: 0.3em;
-              color: var(--text-muted);
-              text-transform: uppercase;
-              animation: scrollPulse 2s ease-in-out infinite;
-            ">scroll &darr;</div>
+          <div class="reveal-up content-style-35">
+            <div class="div-style-36">scroll &darr;</div>
           </div>
 
+        </div>
+        <div class="orbital-panel">
+          <div class="orbital-caption"><span class="orbital-signal" aria-hidden="true"></span> DEEP SPACE OBSERVATORY <span class="orbital-index" aria-hidden="true">01 / SYZ</span></div>
+          <div class="orbital-stage" id="orbital-stage" role="group" aria-label="Interactive 3D orbital sculpture" aria-describedby="orbital-help">
+            <div class="orbital-reticle" aria-hidden="true"></div>
+            <div class="orbital-static" aria-hidden="true"><span></span></div>
+            <span class="orbital-axis orbital-axis-top" aria-hidden="true">Y</span>
+            <span class="orbital-axis orbital-axis-side" aria-hidden="true">X</span>
+          </div>
+          <div class="orbital-footer">
+            <p class="orbital-help" id="orbital-help">Static orbit preview</p>
+            <div class="orbital-controls" role="group" aria-label="3D scene controls" hidden>
+              <button type="button" data-orbit="left" aria-label="Rotate sculpture left">←</button>
+              <button type="button" data-orbit="right" aria-label="Rotate sculpture right">→</button>
+              <button type="button" data-orbit="reset">Reset view</button>
+              <button type="button" data-orbit="pause" aria-pressed="false">Pause motion</button>
+            </div>
+          </div>
+          <noscript><p class="orbital-help">Static orbit preview. Enable JavaScript to explore in 3D.</p></noscript>
+        </div>
         </div>
       </section>
 
@@ -123,89 +140,68 @@
         <div class="container">
           <div class="grid grid-3 perspective-container">
             <div class="stat-card reveal-up card-3d">
-              <div class="stat-num pop-out-extreme" style="font-family:'Orbitron',sans-serif; color:var(--plasma);">6+</div>
-              <div class="stat-label pop-out" style="font-family:var(--font-mono);">PROJECTS</div>
-              <p class="stat-desc push-in" style="color:var(--text-muted);">Interactive apps & games.</p>
+              <div class="stat-num pop-out-extreme stat-num-style-37">6+</div>
+              <div class="stat-label pop-out stat-label-style-38">PROJECTS</div>
+              <p class="stat-desc push-in stat-desc-style-39">Interactive apps & games.</p>
             </div>
-            <div class="stat-card reveal-up card-3d" style="transition-delay: 0.1s">
-              <div class="stat-num pop-out-extreme" style="font-family:'Orbitron',sans-serif; color:var(--stellar);">3D</div>
-              <div class="stat-label pop-out" style="font-family:var(--font-mono);">GRAPHICS</div>
-              <p class="stat-desc push-in" style="color:var(--text-muted);">OpenGL & Blender models.</p>
+            <div class="stat-card reveal-up card-3d stat-card-style-40">
+              <div class="stat-num pop-out-extreme stat-num-style-41">3D</div>
+              <div class="stat-label pop-out stat-label-style-38">GRAPHICS</div>
+              <p class="stat-desc push-in stat-desc-style-39">OpenGL & Blender models.</p>
             </div>
-            <div class="stat-card reveal-up card-3d" style="transition-delay: 0.2s">
-              <div class="stat-num pop-out-extreme" style="font-family:'Orbitron',sans-serif; color:var(--supernova);">AE</div>
-              <div class="stat-label pop-out" style="font-family:var(--font-mono);">MOTION</div>
-              <p class="stat-desc push-in" style="color:var(--text-muted);">After Effects typography.</p>
+            <div class="stat-card reveal-up card-3d stat-card-style-42">
+              <div class="stat-num pop-out-extreme stat-num-style-43">AE</div>
+              <div class="stat-label pop-out stat-label-style-38">MOTION</div>
+              <p class="stat-desc push-in stat-desc-style-39">After Effects typography.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- PROJECTS 3D GALLERY (Z-Axis Scroll) -->
-      <section id="projects-showcase" class="gallery-3d-section"
-        style="position: relative; height: 400vh; overflow: visible;">
+      <section id="projects-showcase" class="gallery-3d-section gallery-3d-section-style-44">
         <!-- Sticky header inside the section so it stays on screen -->
-        <div class="gallery-header"
-          style="position: sticky; top: 15vh; z-index: 50; text-align: center; pointer-events: none;">
-          <h2 class="section-title reveal-up" style="
-            font-family: 'Space Grotesk', sans-serif; 
-            background: var(--void); 
-            display: inline-block; 
-            padding: 10px 30px; 
-            border: 1px solid var(--glass-border);
-            color: var(--stardust);
-          ">
+        <div class="gallery-header gallery-header-style-45">
+          <h2 class="section-title reveal-up section-title-style-46">
             Selected Works.</h2>
         </div>
 
-        <div class="gallery-viewport"
-          style="position: sticky; top: 0; width: 100%; height: 100vh; overflow: hidden; perspective: 1500px;">
-          <div class="gallery-camera" id="galleryCamera"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d;">
+        <div class="gallery-viewport gallery-viewport-style-47">
+          <div class="gallery-camera gallery-camera-style-48" id="galleryCamera">
 
-            <a href="projects/drag-and-drop-game.html" class="gallery-item card-3d"
-              style="position: absolute; top: 20%; left: 10%; width: 500px; transform: translateZ(0px);">
-              <div class="project-img-wrapper push-in"
-                style="transform-style: preserve-3d; border: 2px solid var(--text-color);">
-                <img src="images/dd3.png" alt="Drag & Drop Game" loading="lazy" class="pop-out">
+            <a href="projects/drag-and-drop-game.html" class="gallery-item card-3d gallery-item-style-49">
+              <div class="project-img-wrapper push-in project-img-wrapper-style-50">
+                <picture><source srcset="images/dd3.webp" type="image/webp"><img src="images/dd3.png" alt="Educational Flashcard drag-and-drop game with answer boxes and a timer" loading="lazy" class="pop-out" width="602" height="229" decoding="async"></picture>
               </div>
-              <div class="project-info pop-out-extreme"
-                style="background: var(--bg-color); border: 2px solid var(--text-color); border-top: 2px solid var(--plasma); margin-top: -30px; margin-left: 40px; position: relative;">
+              <div class="project-info pop-out-extreme project-info-style-51">
                 <h3>Flashcard Game</h3>
                 <p>Unity C# Interactive</p>
               </div>
             </a>
 
-            <a href="projects/opengl-cafeteria.html" class="gallery-item card-3d"
-              style="position: absolute; top: 30%; right: 10%; width: 500px; transform: translateZ(-1500px);">
-              <div class="project-img-wrapper push-in"
-                style="transform-style: preserve-3d; border: 2px solid var(--text-color);">
-                <img src="images/cf5.png" alt="OpenGL Cafeteria" loading="lazy" class="pop-out">
+            <a href="projects/opengl-cafeteria.html" class="gallery-item card-3d gallery-item-style-52">
+              <div class="project-img-wrapper push-in project-img-wrapper-style-50">
+                <picture><source srcset="images/cf5.webp" type="image/webp"><img src="images/cf5.png" alt="OpenGL campus scene with buildings, trees and a landscaped courtyard" loading="lazy" class="pop-out" width="602" height="413" decoding="async"></picture>
               </div>
-              <div class="project-info pop-out-extreme"
-                style="background: var(--bg-color); border: 2px solid var(--text-color); border-top: 2px solid var(--plasma); margin-top: -30px; margin-right: 40px; position: relative;">
+              <div class="project-info pop-out-extreme project-info-style-53">
                 <h3>OpenGL 3D Cafeteria</h3>
                 <p>C++ WebGL Primitives</p>
               </div>
             </a>
 
-            <a href="projects/blender-workshop-2.html" class="gallery-item card-3d"
-              style="position: absolute; top: 15%; left: 15%; width: 500px; transform: translateZ(-3000px);">
-              <div class="project-img-wrapper push-in"
-                style="transform-style: preserve-3d; border: 2px solid var(--text-color);">
-                <img src="images/ws1.png" alt="Blender Workshop" loading="lazy" class="pop-out">
+            <a href="projects/blender-workshop-2.html" class="gallery-item card-3d gallery-item-style-54">
+              <div class="project-img-wrapper push-in project-img-wrapper-style-50">
+                <picture><source srcset="images/ws1.webp" type="image/webp"><img src="images/ws1.png" alt="Blender workspace comparing color and grayscale renders of an interior scene" loading="lazy" class="pop-out" width="602" height="325" decoding="async"></picture>
               </div>
-              <div class="project-info pop-out-extreme"
-                style="background: var(--bg-color); border: 2px solid var(--text-color); border-top: 2px solid var(--plasma); margin-top: -30px; margin-left: 40px; position: relative;">
+              <div class="project-info pop-out-extreme project-info-style-51">
                 <h3>Blender Rendering</h3>
                 <p>3D Modeling & Lighting</p>
               </div>
             </a>
 
-            <a href="projects.html" class="gallery-item view-all-card card-3d"
-              style="position: absolute; top: 40%; left: 50%; width: 400px; margin-left: -200px; transform: translateZ(-4500px); background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 2px solid var(--stellar); display: flex; align-items: center; justify-content: center; min-height: 200px;">
+            <a href="projects.html" class="gallery-item view-all-card card-3d gallery-item-style-55">
               <div class="project-info text-center pop-out-extreme">
-                <h3 style="color: var(--stardust);">View All Projects &rarr;</h3>
+                <h3 class="h3-style-56">View All Projects &rarr;</h3>
               </div>
             </a>
 
@@ -217,8 +213,8 @@
       <section id="contact" class="contact section-padding">
         <div class="container text-center">
           <span class="eyebrow reveal-up">OPEN CHANNEL</span>
-          <h2 class="section-title reveal-up" style="font-size:clamp(2.5rem,5vw,4rem);">Let's Connect.</h2>
-          <p class="reveal-up" style="color:var(--text-muted); margin-bottom:2.5rem; font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase;">
+          <h2 class="section-title reveal-up section-title-style-57">Let's Connect.</h2>
+          <p class="reveal-up content-style-58">
             OPEN TO INTERNSHIPS &middot; COLLABORATIONS &middot; NEW OPPORTUNITIES
           </p>
           <div class="contact-links reveal-up">
@@ -226,21 +222,32 @@
             <a href="https://github.com/Mie02" target="_blank" class="btn btn-secondary">⌥ GitHub</a>
             <a href="assests/pdf/Syahmi_LogBook.pdf" target="_blank" class="btn btn-outline">↓ Logbook</a>
           </div>
+          <div class="contact-actions">
+            <button type="button" class="btn btn-secondary" id="copy-email" data-email="ahmadsyahmi723@gmail.com">Copy email</button>
+            <span class="contact-pending">LinkedIn — [PLACEHOLDER: LinkedIn URL]</span>
+          </div>
+          <p class="copy-status" id="copy-email-status" role="status" aria-live="polite"></p>
+          <div class="email-copy-fallback" id="email-copy-fallback" hidden>
+            <label for="email-copy-value">Email address</label>
+            <input id="email-copy-value" type="text" readonly value="ahmadsyahmi723@gmail.com" />
+            <p>Select and copy this address.</p>
+          </div>
+
         </div>
       </section>
 
+
+    </div>
+  </main>
+
       <footer class="footer">
         <div class="container text-center">
-          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+          <p class="p-style-28">
             &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
           </p>
         </div>
       </footer>
 
-    </div>
-  </main>
-
-  <script src="apple-script.js"></script>
 </body>
 
 </html>

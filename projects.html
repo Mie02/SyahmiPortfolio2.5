@@ -4,208 +4,185 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects — Ahmad Syahmi Zufayri</title>
-  <meta name="description" content="View the portfolio projects of Ahmad Syahmi Zufayri." />
+  <meta name="description" content="Browse Unity, OpenGL, Blender and motion graphics projects by Ahmad Syahmi Zufayri, plus an in-progress AR indoor navigation project." />
+
+
+
+
+  <!-- SEO and sharing -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="[PLACEHOLDER: SITE_URL]/projects.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ahmad Syahmi Zufayri" />
+  <meta property="og:title" content="Projects — Ahmad Syahmi Zufayri" />
+  <meta property="og:description" content="Browse Unity, OpenGL, Blender and motion graphics projects by Ahmad Syahmi Zufayri, plus an in-progress AR indoor navigation project." />
+  <meta property="og:url" content="[PLACEHOLDER: SITE_URL]/projects.html" />
+  <meta property="og:image" content="[PLACEHOLDER: SITE_URL]/images/cf5.png" />
+  <meta property="og:image:alt" content="OpenGL campus scene" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects — Ahmad Syahmi Zufayri" />
+  <meta name="twitter:description" content="Browse Unity, OpenGL, Blender and motion graphics projects by Ahmad Syahmi Zufayri, plus an in-progress AR indoor navigation project." />
+  <meta name="twitter:image" content="[PLACEHOLDER: SITE_URL]/images/cf5.png" />
+  <!-- /SEO and sharing -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <!-- Core Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="script.js"></script>
 </head>
-<body class="apple-theme">
+<body class="apple-theme" data-page="inner" data-space="lite">
+  <a class="skip-link" href="#smooth-wrapper">Skip to content</a>
 
-  <div id="webgl-container" aria-hidden="true"></div>
+  <div id="webgl-container" aria-hidden="true">
+    <div class="space-fallback"><span></span><span></span></div>
+  </div>
   <div id="cursorGlow" aria-hidden="true"></div>
   <div id="cursorDot" aria-hidden="true"></div>
 
   <header class="nav" id="navbar">
     <div class="nav-inner">
       <a class="logo" href="index.html">SYZ.</a>
-      <nav class="links">
+      <nav class="links" aria-label="Primary navigation">
         <a href="index.html">Home</a>
-        <a href="projects.html" class="active">Projects</a>
+        <a href="projects.html" class="active" aria-current="page">Projects</a>
         <a href="biodata.html">Biodata</a>
         <a href="skills.html">Skills</a>
         <a href="index.html#contact">Contact</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" type="button" aria-controls="mobileMenu" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
       </button>
     </div>
   </header>
   
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true" hidden inert>
     <a href="index.html">Home</a>
     <a href="projects.html">Projects</a>
     <a href="biodata.html">Biodata</a>
     <a href="skills.html">Skills</a>
     <a href="index.html#contact">Contact</a>
-  </div>
+  </nav>
 
-  <main id="smooth-wrapper">
+  <main id="smooth-wrapper" tabindex="-1">
     <div id="smooth-content">
       
       <!-- HERO SECTION -->
       <section class="hero section-padding">
         <div class="container text-center">
-          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">SELECTED WORKS</div>
-          <h1 class="hero-title reveal-up" style="
-            font-family: 'Orbitron', var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            background: linear-gradient(135deg, var(--stardust) 30%, var(--stellar) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-          ">Portfolio<br>Showcase.</h1>
-          <p class="hero-subtitle reveal-up" style="
-            font-family: var(--font-mono); 
-            font-size: 0.8rem; 
-            letter-spacing: 0.2em; 
-            color: var(--text-muted);
-            text-transform: uppercase;
-          ">
+          <div class="eyebrow reveal-up eyebrow-style-1">SELECTED WORKS</div>
+          <h1 class="hero-title reveal-up hero-title-style-74">Portfolio<br>Showcase.</h1>
+          <p class="hero-subtitle reveal-up hero-subtitle-style-75">
             INTERACTIVE GAMES &middot; 3D RENDERS &middot; MOTION GRAPHICS
           </p>
         </div>
       </section>
 
       <!-- PROJECTS GRID -->
-      <section class="expertise section-padding" style="padding-top: 0;">
+      <section class="expertise section-padding expertise-style-61">
         <div class="container">
-          <div class="grid grid-3">
+          <h2 class="visually-hidden" id="project-collection-title">Projects</h2>
+          <div class="project-filter-bar">
+            <div class="project-filters" role="group" aria-label="Filter projects">
+              <button class="filter-chip" type="button" data-filter="all" aria-pressed="true" aria-controls="project-grid">All</button>
+              <button class="filter-chip" type="button" data-filter="unity" aria-pressed="false" aria-controls="project-grid">Unity</button>
+              <button class="filter-chip" type="button" data-filter="opengl" aria-pressed="false" aria-controls="project-grid">OpenGL</button>
+              <button class="filter-chip" type="button" data-filter="blender" aria-pressed="false" aria-controls="project-grid">Blender</button>
+              <button class="filter-chip" type="button" data-filter="motion" aria-pressed="false" aria-controls="project-grid">Motion</button>
+            </div>
+            <p id="project-filter-status" class="filter-status" role="status" aria-live="polite">7 projects</p>
+          </div>
+          <div class="grid grid-3 project-grid" id="project-grid">
             
-            <a href="projects/drag-and-drop-game.html" class="project-card reveal-up" style="width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/drag-and-drop-game.html" data-project-tags="unity" class="project-card project-card-style-76">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/dd3.png" alt="Drag & Drop Game" loading="lazy">
+                <picture><source srcset="images/dd3.webp" type="image/webp"><img src="images/dd3.png" alt="Educational Flashcard drag-and-drop game with answer boxes and a timer" loading="lazy" width="602" height="229" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>Drag &amp; Drop Game</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Unity &middot; C# &middot; UI/UX</p>
+                <p class="p-style-78">Unity &middot; C# &middot; UI/UX</p>
               </div>
             </a>
 
-            <a href="projects/opengl-cafeteria.html" class="project-card reveal-up" style="transition-delay: 0.1s; width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/opengl-cafeteria.html" data-project-tags="opengl" class="project-card project-card-style-79">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/cf5.png" alt="OpenGL Cafeteria" loading="lazy">
+                <picture><source srcset="images/cf5.webp" type="image/webp"><img src="images/cf5.png" alt="OpenGL campus scene with buildings, trees and a landscaped courtyard" loading="lazy" width="602" height="413" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>OpenGL 3D Cafeteria</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">C++ &middot; OpenGL &middot; WebGL</p>
+                <p class="p-style-78">C++ &middot; OpenGL &middot; WebGL</p>
               </div>
             </a>
 
-            <a href="projects/motion-graphics.html" class="project-card reveal-up" style="transition-delay: 0.2s; width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/motion-graphics.html" data-project-tags="motion" class="project-card project-card-style-80">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/mg4.png" alt="Motion Graphics" loading="lazy">
+                <picture><source srcset="images/mg4.webp" type="image/webp"><img src="images/mg4.png" alt="After Effects composition with a framed video and animation timeline" loading="lazy" width="602" height="267" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>Motion Graphics</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">After Effects &middot; Typography</p>
+                <p class="p-style-78">After Effects &middot; Typography</p>
               </div>
             </a>
 
-            <a href="projects/computer-animation.html" class="project-card reveal-up" style="width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/computer-animation.html" data-project-tags="blender" class="project-card project-card-style-76">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/ca4.png" alt="Computer Animation" loading="lazy">
+                <picture><source srcset="images/ca4.webp" type="image/webp"><img src="images/ca4.png" alt="Blender viewport showing a cluster of dark rigid-body objects" loading="lazy" width="602" height="308" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>Computer Animation</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Blender &middot; Rigid Body</p>
+                <p class="p-style-78">Blender &middot; Rigid Body</p>
               </div>
             </a>
 
-            <a href="projects/blender-workshop-2.html" class="project-card reveal-up" style="transition-delay: 0.1s; width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/blender-workshop-2.html" data-project-tags="blender" class="project-card project-card-style-79">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/ws1.png" alt="Blender Workshop" loading="lazy">
+                <picture><source srcset="images/ws1.webp" type="image/webp"><img src="images/ws1.png" alt="Blender workspace comparing color and grayscale renders of an interior scene" loading="lazy" width="602" height="325" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>Blender Rendering Workshop</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Blender &middot; Lighting &middot; Render</p>
+                <p class="p-style-78">Blender &middot; Lighting &middot; Render</p>
               </div>
             </a>
 
-            <a href="projects/bujang-lapok.html" class="project-card reveal-up" style="transition-delay: 0.2s; width: 100%; position:relative;">
-              <div style="
-                position:absolute; top:1rem; right:1rem; z-index:2;
-                font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em;
-                padding:0.25rem 0.6rem;
-                background:rgba(0,198,255,0.1);
-                border:1px solid var(--plasma);
-                border-radius:4px;
-                color:var(--plasma);
-              ">COMPLETED</div>
+            <a href="projects/bujang-lapok.html" data-project-tags="motion" class="project-card project-card-style-80">
+              <div class="div-style-77">COMPLETED</div>
               <div class="project-img-wrapper">
-                <img src="images/bj4.png" alt="Bujang Lapok Recreate" loading="lazy">
+                <picture><source srcset="images/bl4.webp" type="image/webp"><img src="images/bl4.png" alt="Bujang Lapok Recreate image 4 placeholder; replacement media has not been supplied" loading="lazy" width="1280" height="720" decoding="async"></picture>
               </div>
               <div class="project-info">
                 <h3>Bujang Lapok Recreate</h3>
-                <p style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--plasma);">Premiere Pro &middot; Color Grade</p>
+                <p class="p-style-78">Premiere Pro &middot; Color Grade</p>
               </div>
             </a>
 
+
+            <a href="projects/fyp-ar-navigation.html" data-project-tags="ar" class="project-card project-card-style-76">
+              <div class="div-style-77">IN PROGRESS</div>
+              <div class="project-fyp-preview" aria-hidden="true"><span>AR</span><span>FTMK</span></div>
+              <div class="project-info"><h3>AR Indoor Navigation</h3><p class="p-style-78">Final Year Project · FTMK building</p></div>
+            </a>
           </div>
         </div>
       </section>
 
+
+    </div>
+  </main>
+
       <footer class="footer">
         <div class="container text-center">
-          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+          <p class="p-style-28">
             &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
           </p>
         </div>
       </footer>
 
-    </div>
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
