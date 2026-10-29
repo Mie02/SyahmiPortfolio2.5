@@ -3,113 +3,131 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bujang Lapok Recreate — Ahmad Syahmi Zufayri</title>
+  <title>Bujang Lapok Recreation — Ahmad Syahmi Zufayri</title>
+  <meta name="description" content="A recreation of a scene from P. Ramlee’s Bujang Lapok, edited and color graded with Adobe Premiere Pro." />
+
+
+
+
+  <!-- SEO and sharing -->
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="[PLACEHOLDER: SITE_URL]/projects/bujang-lapok.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ahmad Syahmi Zufayri" />
+  <meta property="og:title" content="Bujang Lapok Recreation — Ahmad Syahmi Zufayri" />
+  <meta property="og:description" content="A recreation of a scene from P. Ramlee’s Bujang Lapok, edited and color graded with Adobe Premiere Pro." />
+  <meta property="og:url" content="[PLACEHOLDER: SITE_URL]/projects/bujang-lapok.html" />
+  <meta property="og:image" content="[PLACEHOLDER: SITE_URL]/images/bl4.png" />
+  <meta property="og:image:alt" content="Bujang Lapok Recreate placeholder media" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bujang Lapok Recreation — Ahmad Syahmi Zufayri" />
+  <meta name="twitter:description" content="A recreation of a scene from P. Ramlee’s Bujang Lapok, edited and color graded with Adobe Premiere Pro." />
+  <meta name="twitter:image" content="[PLACEHOLDER: SITE_URL]/images/bl4.png" />
+  <!-- /SEO and sharing -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="../script.js"></script>
 </head>
-<body class="apple-theme">
-  <div id="webgl-container" aria-hidden="true"></div>
+<body class="apple-theme" data-page="inner" data-space="lite">
+  <a class="skip-link" href="#smooth-wrapper">Skip to content</a>
+  <div id="webgl-container" aria-hidden="true">
+    <div class="space-fallback"><span></span><span></span></div>
+  </div>
   <div id="cursorGlow" aria-hidden="true"></div>
   <div id="cursorDot" aria-hidden="true"></div>
 
   <header class="nav" id="navbar">
     <div class="nav-inner">
       <a class="logo" href="../index.html">SYZ.</a>
-      <nav class="links">
+      <nav class="links" aria-label="Primary navigation">
         <a href="../index.html">Home</a>
-        <a href="../projects.html" class="active">Projects</a>
+        <a href="../projects.html" class="active" aria-current="page">Projects</a>
         <a href="../biodata.html">Biodata</a>
         <a href="../skills.html">Skills</a>
         <a href="../index.html#contact">Contact</a>
       </nav>
+      <button class="hamburger" id="hamburger" type="button" aria-controls="mobileMenu" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   
-  <main id="smooth-wrapper">
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true" hidden inert>
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../biodata.html">Biodata</a>
+        <a href="../skills.html">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+      
+  </nav>
+
+  <main id="smooth-wrapper" tabindex="-1">
     <div id="smooth-content">
       <section class="hero section-padding">
         <div class="container text-center">
-          <div class="eyebrow reveal-up" style="margin-bottom:1.5rem;">CASE STUDY</div>
-          <h1 class="hero-title reveal-up" style="
-            font-family: 'Orbitron', var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            background: linear-gradient(180deg, var(--stardust) 0%, var(--plasma) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-          ">Bujang Lapok<br>Recreate.</h1>
-          <p class="hero-subtitle reveal-up" style="font-family:var(--font-mono); font-size:0.9rem; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase;">Premiere Pro Editing</p>
-          <div class="hero-cta reveal-up" style="margin-top: 2rem;">
+          <div class="eyebrow reveal-up eyebrow-style-1">CASE STUDY</div>
+          <h1 class="hero-title reveal-up hero-title-style-59">Bujang Lapok<br>Recreate.</h1>
+          <p class="hero-subtitle reveal-up hero-subtitle-style-60">Premiere Pro Editing</p>
+          <div class="hero-cta reveal-up hero-cta-style-5">
             <a href="../projects.html" class="btn btn-outline">&larr; Back to Projects</a>
           </div>
         </div>
       </section>
 
-      <section class="expertise section-padding" style="padding-top: 0;">
-        <div class="container" style="max-width: 900px;">
-          <div class="reveal-up" style="
-            background:var(--glass-bg);
-            padding:3rem;
-            border-radius:12px;
-            border:1px solid var(--glass-border);
-            border-top:2px solid var(--plasma);
-            margin-bottom:4rem;
-          ">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Overview</h2>
-            <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
+      <section class="expertise section-padding expertise-style-61">
+        <div class="container container-style-62">
+          <div class="reveal-up content-style-63">
+            <h2 class="h2-style-64">Overview</h2>
+            <p class="p-style-65">
               A creative recreation of a classic scene from P. Ramlee's 'Bujang Lapok', edited and color graded using Adobe Premiere Pro.
             </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <span style="
-                background:rgba(0,198,255,0.08);
-                border:1px solid rgba(0,198,255,0.25);
-                border-radius:4px;
-                padding:0.3rem 0.8rem;
-                font-family:var(--font-mono);
-                font-size:0.72rem;
-                letter-spacing:0.08em;
-                color:var(--plasma);
-              ">Premiere Pro</span>
-              <span style="
-                background:rgba(0,198,255,0.08);
-                border:1px solid rgba(0,198,255,0.25);
-                border-radius:4px;
-                padding:0.3rem 0.8rem;
-                font-family:var(--font-mono);
-                font-size:0.72rem;
-                letter-spacing:0.08em;
-                color:var(--plasma);
-              ">Video Editing</span>
+            <div class="div-style-66">
+              <span class="span-style-67">Premiere Pro</span>
+              <span class="span-style-67">Video Editing</span>
             </div>
           </div>
 
-          <h2 class="section-title reveal-up text-center" style="margin-bottom: 2rem;">Gallery</h2>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
-            <img src="../images/bl1.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
-            <img src="../images/bl2.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
-            <img src="../images/bl3.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
-            <img src="../images/bl4.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
-            <img src="../images/bl5.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
-            <img src="../images/bl6.png" alt="Screenshot" class="reveal-up" style="width: 100%; border-radius:8px; border:1px solid var(--glass-border); transition:box-shadow 0.3s ease;" onmouseover="this.style.boxShadow='0 0 20px rgba(0,198,255,0.15)'" onmouseout="this.style.boxShadow='none'" loading="lazy">
+          <dl class="case-facts">
+            <div><dt>Role</dt><dd class="placeholder-field">[PLACEHOLDER: Role in Bujang Lapok Recreate]</dd></div>
+            <div><dt>Tools</dt><dd>Premiere Pro · Video Editing</dd></div>
+            <div><dt>Timeline</dt><dd class="placeholder-field">[PLACEHOLDER: Project timeline]</dd></div>
+          </dl>
+          <section class="case-section" aria-labelledby="challenge-title"><h2 id="challenge-title">Challenge</h2><p class="placeholder-field">[PLACEHOLDER: Project challenge and constraints]</p></section>
+          <section class="case-section" aria-labelledby="built-title"><h2 id="built-title">What I built</h2><ul><li>A recreation of a scene from P. Ramlee’s Bujang Lapok.</li><li>Editing and color grading in Adobe Premiere Pro.</li></ul></section>
+          <section class="case-section" aria-labelledby="outcome-title"><h2 id="outcome-title">Outcome / learned</h2><p class="placeholder-field">[PLACEHOLDER: Project outcomes and lessons learned]</p></section>
+
+
+
+          <h2 class="section-title reveal-up text-center section-title-style-68">Gallery</h2>
+          <div class="div-style-69">
+            <picture><source srcset="../images/bl1.webp" type="image/webp"><img src="../images/bl1.png" alt="Bujang Lapok Recreate image 1 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
+            <picture><source srcset="../images/bl2.webp" type="image/webp"><img src="../images/bl2.png" alt="Bujang Lapok Recreate image 2 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
+            <picture><source srcset="../images/bl3.webp" type="image/webp"><img src="../images/bl3.png" alt="Bujang Lapok Recreate image 3 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
+            <picture><source srcset="../images/bl4.webp" type="image/webp"><img src="../images/bl4.png" alt="Bujang Lapok Recreate image 4 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
+            <picture><source srcset="../images/bl5.webp" type="image/webp"><img src="../images/bl5.png" alt="Bujang Lapok Recreate image 5 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
+            <picture><source srcset="../images/bl6.webp" type="image/webp"><img src="../images/bl6.png" alt="Bujang Lapok Recreate image 6 placeholder; replacement media has not been supplied" class="reveal-up content-style-70 media-hover-glow" loading="lazy" width="1280" height="720" decoding="async"></picture>
           </div>
         </div>
       </section>
 
+
+      <nav class="case-pagination container" aria-label="Project navigation">
+        <a class="case-page-link" href="blender-workshop-2.html"><span>← Previous project</span><strong>Blender Workshop 2</strong></a>
+        <a class="case-page-link" href="fyp-ar-navigation.html"><span>Next project →</span><strong>AR Indoor Navigation FYP</strong></a>
+      </nav>
+    </div>
+  </main>
+
       <footer class="footer">
         <div class="container text-center">
-          <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); opacity:0.5;">
+          <p class="p-style-28">
             &copy; <span id="year"></span> Ahmad Syahmi Zufayri &middot; Built in the void between stars
           </p>
         </div>
       </footer>
-    </div>
-  </main>
-  <script src="../script.js"></script>
 </body>
 </html>
